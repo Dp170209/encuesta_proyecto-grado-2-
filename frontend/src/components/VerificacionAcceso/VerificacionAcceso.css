@@ -1,0 +1,244 @@
+/* Estilos para la Pantalla de Verificación y Acceso de Graduados (USEI UCB) */
+
+.verif-page-wrapper {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background-color: #f1f5f9;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.verif-card {
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+/* Cabecera Azul Institucional */
+.verif-card-header {
+  background: linear-gradient(135deg, #0e3d7a 0%, #1a4f9c 100%);
+  color: #ffffff;
+  padding: 1.8rem 1.5rem;
+  text-align: center;
+}
+
+.verif-card-header h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.3px;
+}
+
+.verif-card-header p {
+  font-size: 0.82rem;
+  opacity: 0.9;
+  margin: 0;
+  color: #e0f2fe;
+}
+
+/* Cuerpo de la Tarjeta */
+.verif-card-body {
+  padding: 1.8rem 1.75rem;
+}
+
+/* Cuadro de Advertencia Permanente de Sesión Única */
+.verif-warning-box {
+  background-color: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.verif-warning-title {
+  color: #b45309;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.verif-warning-text {
+  color: #78350f;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Grupos del Formulario */
+.verif-form-group {
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.verif-form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+
+.verif-input {
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.92rem;
+  color: #0f172a;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.verif-input:focus {
+  border-color: #0e3d7a;
+  box-shadow: 0 0 0 3px rgba(14, 61, 122, 0.12);
+}
+
+.verif-input.input-error {
+  border-color: #ef4444;
+  background-color: #fff5f5;
+}
+
+.verif-input.input-error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.verif-input-hint {
+  display: block;
+  font-size: 0.76rem;
+  color: #64748b;
+  margin-top: 0.35rem;
+}
+
+/* Texto de advertencia para el correo */
+.verif-mail-warning {
+  display: block;
+  font-size: 0.78rem;
+  color: #dc2626;
+  font-weight: 600;
+  margin-top: 0.4rem;
+}
+
+/* Botón de Validación */
+.verif-btn-submit {
+  width: 100%;
+  background: #0e3d7a;
+  color: #ffffff;
+  border: none;
+  padding: 0.85rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.verif-btn-submit:hover:not(:disabled) {
+  background: #09264c;
+  transform: translateY(-1px);
+}
+
+.verif-btn-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Banner de Error General */
+.verif-error-banner {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Pantalla de Éxito / Bienvenida */
+.verif-success-card {
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+}
+
+.verif-success-icon {
+  width: 58px;
+  height: 58px;
+  background-color: #d1fae5;
+  color: #059669;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 1.25rem;
+}
+
+.verif-success-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #065f46;
+  margin-bottom: 0.5rem;
+}
+
+.verif-student-info {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.25rem 0;
+  text-align: left;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.verif-student-info strong {
+  color: #1e293b;
+}
+
+.verif-btn-start {
+  width: 100%;
+  background: #059669;
+  color: #ffffff;
+  border: none;
+  padding: 0.85rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.verif-btn-start:hover {
+  background: #047857;
+}
+
+/* Pie de la tarjeta */
+.verif-card-footer {
+  text-align: center;
+  padding: 1rem 1.5rem 1.5rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  border-top: 1px solid #f1f5f9;
+}
