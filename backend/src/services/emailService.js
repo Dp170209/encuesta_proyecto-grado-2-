@@ -55,13 +55,15 @@ function getTransporter() {
 
 /**
  * Despacha asíncronamente el correo oficial con el Certificado PDF adjunto
- * @param {Object} params - { destinatario, nombreCompleto, nroCertificado, pdfBuffer }
+ * @param {Object} params - { destinatario, nombreCompleto, nroCertificado, pdfBuffer, urlWhatsapp, carrera }
  * @returns {Promise<Object>}
  */
-async function enviarCertificadoGraduado({ destinatario, nombreCompleto, nroCertificado, pdfBuffer }) {
+async function enviarCertificadoGraduado({ destinatario, nombreCompleto, nroCertificado, pdfBuffer, urlWhatsapp, carrera }) {
   try {
     const transport = getTransporter();
     const remitente = process.env.SMTP_FROM || 'usei@ucb.edu.bo';
+    const enlaceWs = urlWhatsapp || 'https://chat.whatsapp.com/H8ZOO6eqwo518VFLFM8eVJ';
+    const nombreCarrera = carrera || 'tu carrera';
 
     const cuerpoTexto = `Buen día ${nombreCompleto || ''}.
 
@@ -69,7 +71,11 @@ Te damos la bienvenida a los ALUMNI UCB de la Universidad Católica Boliviana "S
 
 Ponemos a tu disposición las actividades realizadas por la USEI, para eso te sugerimos que te suscribas a las redes sociales de la unidad (USEI La Paz).
 
-Por último, por ser Alumni UCB puedes optar al descuento del 10% en los cursos de Postgrado.
+🎁 Beneficio Alumni UCB: Puedes optar al descuento del 10% en todos los cursos y programas de Postgrado de la universidad.
+
+💬 Comunidad de WhatsApp:
+Te invitamos a unirte al grupo oficial de Alumni UCB de ${nombreCarrera}:
+${enlaceWs}
 
 Adjunto a este mensaje encontrarás tu Certificado Oficial de Cumplimiento (N° USEI-2026-${String(nroCertificado).padStart(5, '0')}) en formato PDF, indispensable para la tramitación de tu titulación y firma de acta.
 
@@ -87,11 +93,25 @@ Universidad Católica Boliviana "San Pablo" - Sede La Paz`;
           <p><strong>Buen día, ${nombreCompleto || 'Graduado(a)'}:</strong></p>
           <p>Te damos la bienvenida a los <strong>ALUMNI UCB</strong> de la Universidad Católica Boliviana "San Pablo".</p>
           <p>Ponemos a tu disposición las actividades realizadas por la USEI, para eso te sugerimos que te suscribas a las redes sociales de la unidad (USEI La Paz).</p>
+          
           <div style="background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 12px; margin: 16px 0; border-radius: 4px;">
             <p style="margin: 0; color: #1e40af; font-size: 14px;">
               🎁 <strong>Beneficio Alumni UCB:</strong> Recuerda que puedes optar al <strong>descuento del 10%</strong> en todos los cursos y programas de Postgrado de la universidad.
             </p>
           </div>
+
+          <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 16px; margin: 18px 0; text-align: center;">
+            <p style="margin: 0 0 10px 0; font-size: 14px; color: #166534; font-weight: bold;">
+              💬 Únete al grupo oficial de Alumni UCB (${nombreCarrera}):
+            </p>
+            <a href="${enlaceWs}" target="_blank" style="display: inline-block; background-color: #25D366; color: #ffffff; text-decoration: none; font-weight: bold; padding: 11px 22px; border-radius: 6px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              👉 Unirme a la Comunidad de WhatsApp
+            </a>
+            <p style="margin: 8px 0 0 0; font-size: 12px; color: #64748b;">
+              O ingresa mediante este enlace: <br><a href="${enlaceWs}" style="color: #059669;">${enlaceWs}</a>
+            </p>
+          </div>
+
           <p>Adjunto a este correo encontrarás tu <strong>Certificado Oficial de Cumplimiento (PDF)</strong> para adjuntarlo a tu trámite de titulación.</p>
           <p style="margin-top: 24px; color: #64748b; font-size: 13px;">
             Saludos cordiales,<br>

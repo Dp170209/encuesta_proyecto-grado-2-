@@ -30,6 +30,37 @@ async function verificarGraduado(req, res) {
   }
 }
 
+/**
+ * Controlador POST /api/auth/login-admin
+ * Autenticación exclusiva para administradores de la USEI
+ */
+async function loginAdmin(req, res) {
+  try {
+    const { correo_institucional, password } = req.body;
+
+    if (!correo_institucional || !password) {
+      return res.status(400).json({
+        exito: false,
+        error: 'Debe ingresar su correo institucional y su contraseña.',
+      });
+    }
+
+    const resultado = await authService.loginAdmin({
+      correo_institucional,
+      password,
+    });
+
+    return res.status(200).json(resultado);
+  } catch (error) {
+    return res.status(401).json({
+      exito: false,
+      error: error.message || 'Error al autenticar administrador.',
+    });
+  }
+}
+
 module.exports = {
   verificarGraduado,
+  loginAdmin,
 };
+

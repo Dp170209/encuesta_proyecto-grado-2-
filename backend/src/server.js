@@ -5,6 +5,11 @@ require('dotenv').config();
 const etlRoutes = require('./routes/etlRoutes');
 const authRoutes = require('./routes/authRoutes');
 const encuestaRoutes = require('./routes/encuestaRoutes');
+const analiticaRoutes = require('./routes/analiticaRoutes');
+const { seedDefaultAdmin } = require('./db/seedAdmin');
+
+// Inicializar administrador por defecto si no existe
+seedDefaultAdmin();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -28,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/etl', etlRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/encuesta', encuestaRoutes);
+app.use('/api/analitica', analiticaRoutes);
 
 // Endpoint de verificación de salud (Health Check)
 app.get('/api/health', (req, res) => {

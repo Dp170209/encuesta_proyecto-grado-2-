@@ -28,6 +28,8 @@ async function main() {
     nombreCompleto: 'Estudiante de Prueba',
     nroCertificado: 2216,
     pdfBuffer,
+    carrera: 'Ingeniería Industrial',
+    urlWhatsapp: 'https://chat.whatsapp.com/LWNe97Hi0RmJcyzCbLRnML',
   });
 
   if (resultado.exito) {

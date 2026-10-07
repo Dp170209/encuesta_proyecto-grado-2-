@@ -128,6 +128,8 @@ async function guardarRespuestas(req, res) {
           nombreCompleto,
           nroCertificado: certEmitido.nro_certificado,
           pdfBuffer,
+          urlWhatsapp,
+          carrera,
         })
         .catch((mailErr) => {
           console.error('[SMTP Background Error]:', mailErr.message);

@@ -175,7 +175,64 @@ async function verificarGraduado({ carnet_identidad, nombre_completo, correo_pri
   };
 }
 
+const bcrypt = require('bcryptjs');
+
+/**
+ * Autenticación de Administradores de la USEI
+ */
+async function loginAdmin({ correo_institucional, password }) {
+  if (!correo_institucional || !password) {
+    throw new Error('Debe ingresar su correo institucional y su contraseña.');
+  }
+
+  const emailLimpio = correo_institucional.trim().toLowerCase();
+
+  const res = await db.query(
+    `SELECT id_admin, correo_institucional, password_hash, nombre_completo, estado_activo
+     FROM administrador_usei
+     WHERE LOWER(correo_institucional) = $1
+     LIMIT 1`,
+    [emailLimpio]
+  );
+
+  if (res.rows.length === 0) {
+    throw new Error('Credenciales administrativas incorrectas.');
+  }
+
+  const admin = res.rows[0];
+
+  if (!admin.estado_activo) {
+    throw new Error('Su cuenta de administrador se encuentra inactiva. Contacte al soporte de la USEI.');
+  }
+
+  const passwordValido = await bcrypt.compare(password, admin.password_hash);
+  if (!passwordValido) {
+    throw new Error('Credenciales administrativas incorrectas.');
+  }
+
+  const payload = {
+    rol: 'ADMIN',
+    id_admin: admin.id_admin,
+    nombre_completo: admin.nombre_completo,
+    correo_institucional: admin.correo_institucional,
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '8h' });
+
+  return {
+    exito: true,
+    mensaje: 'Autenticación administrativa exitosa.',
+    token,
+    admin: {
+      id_admin: admin.id_admin,
+      nombre_completo: admin.nombre_completo,
+      correo_institucional: admin.correo_institucional,
+    },
+  };
+}
+
 module.exports = {
   validarCorreoPrivado,
   verificarGraduado,
+  loginAdmin,
 };

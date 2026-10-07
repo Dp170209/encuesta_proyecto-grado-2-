@@ -1,3 +1,5 @@
+import { getAdminToken } from './adminApi';
+
 const API_BASE_URL =
   (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_URL) ||
   'http://localhost:5000/api';
@@ -13,8 +15,13 @@ export async function subirListaHabilitados(file, gestionSemestre = '2026-1') {
   formData.append('archivo', file);
   formData.append('gestion_semestre', gestionSemestre);
 
+  const token = getAdminToken();
+
   const response = await fetch(`${API_BASE_URL}/etl/cargar-habilitados`, {
     method: 'POST',
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     body: formData,
   });
 
@@ -33,7 +40,13 @@ export async function subirListaHabilitados(file, gestionSemestre = '2026-1') {
  * @returns {Promise<Array>}
  */
 export async function obtenerHabilitados(limite = 20) {
-  const response = await fetch(`${API_BASE_URL}/etl/habilitados?limite=${limite}`);
+  const token = getAdminToken();
+
+  const response = await fetch(`${API_BASE_URL}/etl/habilitados?limite=${limite}`, {
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
   const data = await response.json();
 
   if (!response.ok) {
