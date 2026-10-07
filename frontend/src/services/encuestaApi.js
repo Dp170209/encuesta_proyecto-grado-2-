@@ -4,7 +4,7 @@ const API_BASE_URL =
 
 /**
  * Envía las respuestas estructuradas consolidadas (JSONB) al backend
- * Utiliza el token JWT almacenado en sessionStorage
+ * y dispara la emisión del certificado y enlace a WhatsApp (HU-03 y HU-04)
  */
 export async function guardarEncuesta(contenidoJson, gestionAcademica = 2026) {
   const token = sessionStorage.getItem('usei_token');
@@ -32,6 +32,36 @@ export async function guardarEncuesta(contenidoJson, gestionAcademica = 2026) {
   }
 
   return data;
+}
+
+/**
+ * Descarga directamente el certificado oficial generado en PDF
+ */
+export async function descargarCertificadoPdf(carnet) {
+  const token = sessionStorage.getItem('usei_token');
+  if (!token) {
+    throw new Error('Debe tener una sesión activa para descargar el certificado.');
+  }
+
+  const response = await fetch(`${API_BASE_URL}/encuesta/descargar-certificado`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('No se pudo generar la descarga del certificado PDF.');
+  }
+
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Certificado_USEI_${carnet || 'Graduacion'}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  document.body.removeChild(a);
 }
 
 /**

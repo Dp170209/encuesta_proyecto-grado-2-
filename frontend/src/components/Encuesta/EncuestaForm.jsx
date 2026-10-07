@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './EncuestaForm.css';
-import { guardarEncuesta } from '../../services/encuestaApi';
+import { guardarEncuesta, descargarCertificadoPdf } from '../../services/encuestaApi';
 import { getGraduadoSesion } from '../../services/authApi';
 
 export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) {
@@ -9,6 +9,8 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
   const [errorValidacion, setErrorValidacion] = useState(null);
   const [finalizada, setFinalizada] = useState(false);
   const [graduado, setGraduado] = useState(null);
+  const [resultadoEmision, setResultadoEmision] = useState(null);
+  const [descargandoPdf, setDescargandoPdf] = useState(false);
 
   // =========================================================================
   // 100% DE LAS PREGUNTAS DEL ANEXO 3 OFICIAL - SISTEMA USEI UCB
@@ -295,6 +297,7 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
       setErrorValidacion(null);
 
       const res = await guardarEncuesta(respuestas, 2026);
+      setResultadoEmision(res.data);
       setFinalizada(true);
 
       if (onEncuestaFinalizada) {
@@ -305,6 +308,17 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleDescargarPdf = async () => {
+    try {
+      setDescargandoPdf(true);
+      await descargarCertificadoPdf(graduado?.carnet_identidad);
+    } catch (err) {
+      alert(err.message || 'Error al descargar el certificado.');
+    } finally {
+      setDescargandoPdf(false);
     }
   };
 
@@ -325,27 +339,71 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
     );
   }
 
+  // PANTALLA DE ÉXITO Y VINCULACIÓN ALUMNI (FIGURA 35 DEL DOCUMENTO - HU-04)
   if (finalizada) {
+    const numCertFormateado = resultadoEmision?.nro_certificado
+      ? String(resultadoEmision.nro_certificado).padStart(5, '0')
+      : '00001';
+    const carreraGraduado = resultadoEmision?.carrera || respuestas.S1P01_Carrera || 'su carrera';
+    const correoPrivadoDestino =
+      resultadoEmision?.correo_destino || respuestas.S1P09_CorreoElectronico || graduado?.correo_privado;
+
     return (
       <div className="encuesta-page-wrapper">
         <div className="encuesta-card encuesta-success-screen">
           <div className="success-badge-icon">✓</div>
-          <h2 style={{ color: '#065f46', marginBottom: '0.5rem', fontSize: '1.5rem' }}>
-            ¡Encuesta Registrada con Éxito!
-          </h2>
-          <p style={{ color: '#475569', maxWidth: '540px', margin: '0 auto 1.5rem', lineHeight: '1.5' }}>
-            Todas tus respuestas del <strong>Anexo 3 Oficial Completo</strong> han sido estructuradas
-            e insertadas en PostgreSQL.
-          </p>
-          <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '1.25rem', maxWidth: '480px', margin: '0 auto 2rem', textAlign: 'left', fontSize: '0.86rem', lineHeight: '1.6' }}>
-            <div><strong>Graduado:</strong> {graduado?.nombres} {graduado?.apellidos}</div>
-            <div><strong>CI:</strong> {graduado?.carnet_identidad}</div>
-            <div><strong>Carrera:</strong> {respuestas.S1P01_Carrera}</div>
-            <div><strong>Total variables consolidadas:</strong> {Object.keys(respuestas).length} respuestas oficiales</div>
+          <h2 className="success-screen-title">¡Encuesta Finalizada!</h2>
+          <p className="success-screen-desc">Tus respuestas han sido registradas con éxito.</p>
+
+          <div className="success-panels-container">
+            {/* Panel: Certificado Enviado */}
+            <div className="success-panel-card panel-email">
+              <div className="panel-header-title">
+                <span>✉️</span>
+                <span>Certificado Enviado</span>
+              </div>
+              <p className="panel-text">
+                Hemos enviado tu Certificado Oficial (N° USEI-2026-{numCertFormateado}) a tu correo electrónico privado: <strong>{correoPrivadoDestino}</strong>. Adjunto encontrarás información importante para habilitar la firma de tu acta de graduación.
+              </p>
+              <button
+                type="button"
+                className="btn-download-pdf-copy"
+                onClick={handleDescargarPdf}
+                disabled={descargandoPdf}
+              >
+                {descargandoPdf ? 'Generando descarga...' : '📥 Descargar copia de Certificado (PDF)'}
+              </button>
+            </div>
+
+            {/* Panel: Beneficio Alumni */}
+            <div className="success-panel-card panel-benefit">
+              <div className="panel-header-title" style={{ color: '#92400e' }}>
+                <span>🎓</span>
+                <span>Beneficio Alumni UCB</span>
+              </div>
+              <p className="panel-text" style={{ color: '#78350f' }}>
+                Recuerda que tienes un <strong>10% de descuento</strong> en todos los programas de Postgrado de la Universidad Católica Boliviana.
+              </p>
+            </div>
           </div>
-          <p style={{ fontSize: '0.85rem', color: '#0284c7' }}>
-            Listo para el siguiente paso: Emisión dinámica de Certificado PDF y redirección a WhatsApp (HU-04).
-          </p>
+
+          {/* Sección de Vinculación a WhatsApp por Carrera */}
+          <div className="whatsapp-community-section">
+            <h3 className="whatsapp-title">¡Únete a tu comunidad!</h3>
+            <p className="whatsapp-desc">
+              Mantente al tanto de ofertas laborales, talleres y networking exclusivo para graduados de <strong>{carreraGraduado}</strong>.
+            </p>
+
+            <a
+              href={resultadoEmision?.url_whatsapp || 'https://chat.whatsapp.com'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-whatsapp-join"
+            >
+              <span className="btn-whatsapp-icon">💬</span>
+              <span>Unirme al grupo de WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
     );
