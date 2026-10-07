@@ -1,0 +1,421 @@
+/* Estilos del Formulario Dinámico de Encuesta Completa (USEI - UCB) */
+
+.encuesta-page-wrapper {
+  max-width: 840px;
+  margin: 1.5rem auto 3rem;
+  padding: 0 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1e293b;
+}
+
+/* Tarjeta Principal */
+.encuesta-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+/* Cabecera Azul de Sección */
+.encuesta-header {
+  background: linear-gradient(135deg, #0e3d7a 0%, #1a4f9c 100%);
+  color: #ffffff;
+  padding: 1.5rem 1.5rem 1.25rem;
+  text-align: center;
+}
+
+.encuesta-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.encuesta-section-subtitle {
+  font-size: 0.82rem;
+  color: #e0f2fe;
+  margin: 0;
+}
+
+/* Barra de Pasos / Progreso */
+.encuesta-steps-nav {
+  display: flex;
+  background: #0a2540;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+}
+
+.step-tab {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-align: center;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.step-tab.active {
+  color: #ffffff;
+  border-bottom-color: #38bdf8;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.step-tab.completed {
+  color: #38bdf8;
+}
+
+/* Barra de Progreso Lineal */
+.progress-bar-container {
+  height: 4px;
+  background-color: #e2e8f0;
+  width: 100%;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #2563eb);
+  transition: width 0.3s ease;
+}
+
+/* Contenido del Formulario */
+.encuesta-body {
+  padding: 1.75rem 1.75rem 2rem;
+}
+
+/* Divisores de subgrupos */
+.section-subgroup {
+  margin-top: 1.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1.5px solid #e2e8f0;
+}
+
+.section-subgroup-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0e3d7a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Filas de 2 columnas */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Alerta de Campos Faltantes */
+.encuesta-alert-error {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+  padding: 0.85rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Preguntas del Formulario */
+.question-group {
+  margin-bottom: 1.5rem;
+}
+
+.question-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.45rem;
+  line-height: 1.35;
+}
+
+.question-label .required {
+  color: #dc2626;
+  margin-left: 0.25rem;
+}
+
+.form-control-input,
+.form-control-select,
+.form-control-textarea {
+  width: 100%;
+  padding: 0.72rem 0.95rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  color: #1e293b;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.form-control-input:focus,
+.form-control-select:focus,
+.form-control-textarea:focus {
+  border-color: #0e3d7a;
+  box-shadow: 0 0 0 3px rgba(14, 61, 122, 0.12);
+}
+
+/* Radio buttons & Checkboxes */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.radio-group-inline {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: #334155;
+  cursor: pointer;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.15s;
+}
+
+.radio-option:hover {
+  background-color: #f8fafc;
+}
+
+.radio-option input[type="radio"],
+.radio-option input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #0e3d7a;
+  cursor: pointer;
+}
+
+/* Bloque Condicional Destacado */
+.conditional-box {
+  background-color: #f8fafc;
+  border: 1.5px dashed #38bdf8;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-top: 0.75rem;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.conditional-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tabla Matriz (Likert Table) para Competencias y Servicios */
+.matrix-container {
+  overflow-x: auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+}
+
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.matrix-table th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+  padding: 0.75rem 0.6rem;
+  border-bottom: 1.5px solid #e2e8f0;
+}
+
+.matrix-table th:first-child {
+  text-align: left;
+  padding-left: 1rem;
+  width: 48%;
+}
+
+.matrix-table td {
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.matrix-table td:first-child {
+  text-align: left;
+  padding-left: 1rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.matrix-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.matrix-table input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0e3d7a;
+  cursor: pointer;
+}
+
+/* Tarjeta Likert para Aspectos Generales */
+.likert-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.likert-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.65rem;
+}
+
+.likert-options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .likert-options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.likert-option-box {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 0.5rem 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: #475569;
+}
+
+.likert-option-box.selected {
+  border-color: #0e3d7a;
+  background-color: #eff6ff;
+  color: #0e3d7a;
+  font-weight: 600;
+}
+
+/* Botones de Navegación */
+.encuesta-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-nav-back {
+  background: #ffffff;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-nav-back:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.btn-nav-next {
+  background: #0e3d7a;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-nav-next:hover:not(:disabled) {
+  background: #09264c;
+}
+
+.btn-nav-finish {
+  background: #059669;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-nav-finish:hover:not(:disabled) {
+  background: #047857;
+}
+
+/* Pantalla de Éxito al finalizar */
+.encuesta-success-screen {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.success-badge-icon {
+  width: 64px;
+  height: 64px;
+  background: #d1fae5;
+  color: #059669;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+}

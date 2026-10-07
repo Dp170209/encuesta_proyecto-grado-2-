@@ -1,10 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GestorIntegracion from './components/GestorIntegracion/GestorIntegracion';
 import VerificacionAcceso from './components/VerificacionAcceso/VerificacionAcceso';
+import EncuestaForm from './components/Encuesta/EncuestaForm';
+import { getGraduadoSesion, cerrarSesion } from './services/authApi';
 
 export default function App() {
-  const [vistaActual, setVistaActual] = useState('graduado'); // 'graduado' o 'admin'
+  const [vistaActual, setVistaActual] = useState('verificacion'); // 'verificacion' | 'encuesta' | 'admin'
   const [sesionGraduado, setSesionGraduado] = useState(null);
+
+  useEffect(() => {
+    const sesion = getGraduadoSesion();
+    if (sesion) {
+      setSesionGraduado(sesion);
+    }
+  }, []);
+
+  const handleAccesoConcedido = (res) => {
+    setSesionGraduado(res.graduado);
+    setVistaActual('encuesta');
+  };
+
+  const handleCerrarSesion = () => {
+    cerrarSesion();
+    setSesionGraduado(null);
+    setVistaActual('verificacion');
+  };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -46,23 +66,40 @@ export default function App() {
           </div>
         </div>
 
-        {/* Selector de Vistas / Roles para navegación del Sprint 1 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {/* Selector de Vistas / Pestañas de Trabajo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
           <button
-            onClick={() => setVistaActual('graduado')}
+            onClick={() => setVistaActual('verificacion')}
             style={{
-              backgroundColor: vistaActual === 'graduado' ? '#0e3d7a' : 'transparent',
+              backgroundColor: vistaActual === 'verificacion' ? '#0e3d7a' : 'transparent',
               color: '#ffffff',
-              border: vistaActual === 'graduado' ? '1.5px solid #38bdf8' : '1px solid #475569',
-              padding: '0.45rem 0.9rem',
+              border: vistaActual === 'verificacion' ? '1.5px solid #38bdf8' : '1px solid #475569',
+              padding: '0.45rem 0.85rem',
               borderRadius: '6px',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: '600',
               cursor: 'pointer',
               transition: 'all 0.2s',
             }}
           >
-            🎓 Portal Graduado (HU-02)
+            1. Verificación (HU-02)
+          </button>
+
+          <button
+            onClick={() => setVistaActual('encuesta')}
+            style={{
+              backgroundColor: vistaActual === 'encuesta' ? '#0e3d7a' : 'transparent',
+              color: '#ffffff',
+              border: vistaActual === 'encuesta' ? '1.5px solid #38bdf8' : '1px solid #475569',
+              padding: '0.45rem 0.85rem',
+              borderRadius: '6px',
+              fontSize: '0.82rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+            }}
+          >
+            2. Encuesta 4 Secciones (HU-03)
           </button>
 
           <button
@@ -71,30 +108,53 @@ export default function App() {
               backgroundColor: vistaActual === 'admin' ? '#0e3d7a' : 'transparent',
               color: '#ffffff',
               border: vistaActual === 'admin' ? '1.5px solid #38bdf8' : '1px solid #475569',
-              padding: '0.45rem 0.9rem',
+              padding: '0.45rem 0.85rem',
               borderRadius: '6px',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               fontWeight: '600',
               cursor: 'pointer',
               transition: 'all 0.2s',
             }}
           >
-            📊 Gestor ETL Admin (HU-01)
+            3. Gestor ETL Admin (HU-01)
           </button>
+
+          {sesionGraduado && (
+            <button
+              onClick={handleCerrarSesion}
+              title="Cerrar sesión de graduado"
+              style={{
+                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                color: '#fca5a5',
+                border: '1px solid #ef4444',
+                padding: '0.45rem 0.75rem',
+                borderRadius: '6px',
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+              }}
+            >
+              Salir ({sesionGraduado.nombres?.split(' ')[0]})
+            </button>
+          )}
         </div>
       </header>
 
-      {/* Contenido principal según la vista seleccionada */}
-      <main style={{ flex: 1 }}>
-        {vistaActual === 'graduado' ? (
-          <VerificacionAcceso
-            onAccesoConcedido={(res) => {
-              setSesionGraduado(res.graduado);
-            }}
-          />
-        ) : (
-          <GestorIntegracion />
+      {/* Contenido principal según la vista activa */}
+      <main style={{ flex: 1, backgroundColor: '#f1f5f9' }}>
+        {vistaActual === 'verificacion' && (
+          <VerificacionAcceso onAccesoConcedido={handleAccesoConcedido} />
         )}
+
+        {vistaActual === 'encuesta' && (
+          <EncuestaForm
+            onEncuestaFinalizada={(res) => {
+              console.log('Encuesta guardada con éxito:', res);
+            }}
+            onVolverAInicio={() => setVistaActual('verificacion')}
+          />
+        )}
+
+        {vistaActual === 'admin' && <GestorIntegracion />}
       </main>
 
       {/* Pie de página institucional */}

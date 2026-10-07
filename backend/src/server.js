@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const etlRoutes = require('./routes/etlRoutes');
 const authRoutes = require('./routes/authRoutes');
+const encuestaRoutes = require('./routes/encuestaRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 // Rutas de la API
 app.use('/api/etl', etlRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/encuesta', encuestaRoutes);
 
 // Endpoint de verificación de salud (Health Check)
 app.get('/api/health', (req, res) => {
