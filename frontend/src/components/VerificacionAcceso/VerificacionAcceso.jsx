@@ -85,21 +85,24 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
   return (
     <div className="verif-page-wrapper">
       <div className="verif-card">
-        {/* Cabecera institucional */}
+        {/* Cabecera de la Tarjeta (Logos en la barra superior oficial) */}
         <div className="verif-card-header">
-          <h2>Encuesta a Tiempo de Graduación</h2>
-          <p>Unidad de Servicios Estudiantiles Integrales (USEI)</p>
+          <div className="verif-header-titles">
+            <span className="verif-badge-sede">Portal de Titulación · Sede La Paz</span>
+            <h2>Encuesta a Tiempo de Graduación</h2>
+            <p>Validación de Identidad de Estudiantes Habilitados</p>
+          </div>
         </div>
 
         <div className="verif-card-body">
-          {/* Mensaje Permanente de Sesión Única */}
+          {/* Mensaje Informativo de Sesión Única */}
           <div className="verif-warning-box">
             <div className="verif-warning-title">
               <span>⚠️</span>
-              <span>¡Aviso Importante!</span>
+              <span>Atención: Registro en Sesión Única</span>
             </div>
             <p className="verif-warning-text">
-              Debes finalizar la encuesta en esta sesión, ya que, de otra manera, tendrás que iniciar nuevamente.
+              Por normativa de la USEI, debes completar y enviar la encuesta en este intento. Al finalizar, el sistema generará automáticamente tu <strong>Certificado Oficial en PDF</strong> para tu trámite de titulación.
             </p>
           </div>
 
@@ -144,14 +147,14 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
               {/* Input: Carnet de Identidad */}
               <div className="verif-form-group">
                 <label className="verif-form-label" htmlFor="carnet_identidad">
-                  Carnet de Identidad
+                  🪪 Carnet de Identidad (CI)
                 </label>
                 <input
                   id="carnet_identidad"
                   name="carnet_identidad"
                   type="text"
                   className="verif-input"
-                  placeholder="Ej. 1234567"
+                  placeholder="Ej. 6849201"
                   value={formData.carnet_identidad}
                   onChange={handleChange}
                   disabled={loading}
@@ -162,35 +165,35 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
               {/* Input: Nombre Completo */}
               <div className="verif-form-group">
                 <label className="verif-form-label" htmlFor="nombre_completo">
-                  Nombre Completo
+                  👤 Nombre Completo
                 </label>
                 <input
                   id="nombre_completo"
                   name="nombre_completo"
                   type="text"
                   className="verif-input"
-                  placeholder="Apellidos y Nombres"
+                  placeholder="Nombres y Apellidos completos"
                   value={formData.nombre_completo}
                   onChange={handleChange}
                   disabled={loading}
                   autoComplete="off"
                 />
                 <span className="verif-input-hint">
-                  Tal como está registrado en la Universidad
+                  Tal como figura en el registro oficial de Kardex Académico UCB
                 </span>
               </div>
 
               {/* Input: Correo Electrónico Privado */}
               <div className="verif-form-group">
                 <label className="verif-form-label" htmlFor="correo_privado">
-                  Correo Electrónico Privado
+                  ✉️ Correo Electrónico Personal
                 </label>
                 <input
                   id="correo_privado"
                   name="correo_privado"
                   type="email"
                   className={`verif-input ${correoInvalido ? 'input-error' : ''}`}
-                  placeholder="tucorreo@gmail.com"
+                  placeholder="ejemplo@gmail.com (No institucional)"
                   value={formData.correo_privado}
                   onChange={handleChange}
                   disabled={loading}
@@ -198,7 +201,12 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
                 />
                 {correoInvalido && (
                   <span className="verif-mail-warning">
-                    * No se permiten correos @ucb.edu.bo. Ingrese un correo personal.
+                    ⚠️ No se permiten correos @ucb.edu.bo. Ingrese una dirección privada para recibir su certificado.
+                  </span>
+                )}
+                {!correoInvalido && (
+                  <span className="verif-input-hint">
+                    Aquí se enviará de forma inmediata su Certificado Oficial de Graduación en PDF.
                   </span>
                 )}
               </div>
@@ -209,7 +217,11 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
                 className="verif-btn-submit"
                 disabled={loading || correoInvalido}
               >
-                {loading ? 'Validando con USEI...' : 'Validar Identidad e Iniciar'}
+                {loading ? (
+                  <>⏳ Validando con Padrón USEI...</>
+                ) : (
+                  <>🔒 Validar Identidad e Iniciar Encuesta →</>
+                )}
               </button>
             </form>
           )}
@@ -217,7 +229,7 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
 
         {/* Pie de Tarjeta */}
         <div className="verif-card-footer">
-          © 2026 Universidad Católica Boliviana "San Pablo"
+          🛡️ Acceso Seguro · Unidad de Servicios Estudiantiles Integrales (USEI) · U.C.B.
         </div>
       </div>
     </div>

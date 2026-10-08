@@ -48,50 +48,66 @@ export default function LoginAdminModal({ isOpen, onClose, onLoginExitoso }) {
       <div
         style={{
           backgroundColor: '#ffffff',
-          borderRadius: '12px',
+          borderRadius: '16px',
           width: '100%',
-          maxWidth: '440px',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          maxWidth: '460px',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.45)',
           overflow: 'hidden',
           border: '1px solid #e2e8f0',
+          borderTop: '4px solid #f59e0b',
         }}
       >
-        {/* Cabecera del modal */}
+        {/* Cabecera del modal con logotipos oficiales */}
         <div
           style={{
-            backgroundColor: '#0a2540',
+            background: 'linear-gradient(145deg, #0a2540 0%, #0e3d7a 100%)',
             color: '#ffffff',
-            padding: '1.25rem 1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            padding: '1.4rem 1.5rem',
+            position: 'relative',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.65rem' }}>
             <span style={{ fontSize: '1.4rem' }}>🔐</span>
-            <div>
-              <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '700' }}>
-                Acceso Administrativo USEI
-              </h3>
-              <p style={{ margin: 0, fontSize: '0.75rem', color: '#94a3b8' }}>
-                Módulo exclusivo para personal autorizado
-              </p>
-            </div>
+            <button
+              onClick={onClose}
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                border: 'none',
+                color: '#cbd5e1',
+                fontSize: '1.1rem',
+                cursor: 'pointer',
+                padding: '0.3rem 0.5rem',
+                borderRadius: '6px',
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#94a3b8',
-              fontSize: '1.25rem',
-              cursor: 'pointer',
-              padding: '0.2rem',
-              lineHeight: 1,
-            }}
-          >
-            ✕
-          </button>
+
+          <div>
+            <span
+              style={{
+                backgroundColor: '#f59e0b',
+                color: '#0a2540',
+                fontSize: '0.68rem',
+                fontWeight: '800',
+                padding: '0.15rem 0.5rem',
+                borderRadius: '4px',
+                textTransform: 'uppercase',
+                display: 'inline-block',
+                marginBottom: '0.35rem',
+              }}
+            >
+              Módulo Administrativo
+            </span>
+            <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: '800', color: '#f8fafc' }}>
+              Portal de Gestión y Analítica USEI
+            </h3>
+            <p style={{ margin: '0.2rem 0 0', fontSize: '0.78rem', color: '#93c5fd' }}>
+              Autenticación oficial para personal autorizado de la U.C.B.
+            </p>
+          </div>
         </div>
 
         {/* Formulario */}
@@ -197,18 +213,20 @@ export default function LoginAdminModal({ isOpen, onClose, onLoginExitoso }) {
               type="submit"
               disabled={cargando}
               style={{
-                backgroundColor: cargando ? '#94a3b8' : '#0e3d7a',
+                background: cargando ? '#94a3b8' : 'linear-gradient(145deg, #0e3d7a 0%, #0a2540 100%)',
                 color: '#ffffff',
                 border: 'none',
-                padding: '0.6rem 1.25rem',
-                borderRadius: '6px',
-                fontSize: '0.85rem',
-                fontWeight: '600',
+                borderBottom: '2px solid #f59e0b',
+                padding: '0.65rem 1.4rem',
+                borderRadius: '8px',
+                fontSize: '0.88rem',
+                fontWeight: '700',
                 cursor: cargando ? 'not-allowed' : 'pointer',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                boxShadow: '0 3px 8px rgba(10, 37, 64, 0.25)',
+                transition: 'all 0.2s',
               }}
             >
-              {cargando ? 'Verificando...' : 'Entrar al Panel'}
+              {cargando ? '⏳ Verificando...' : '🔒 Ingresar al Panel'}
             </button>
           </div>
         </form>

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
+const { normalizarNombreCarrera } = require('../utils/whatsappMap');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'usei_ucb_secret_key_2026_jwt_token';
 
@@ -141,13 +142,15 @@ async function verificarGraduado({ carnet_identidad, nombre_completo, correo_pri
     RETURNING id_graduado, carnet_identidad, nombres, apellidos, correo_privado, celular, carrera;
   `;
 
+  const carreraNormalizada = normalizarNombreCarrera(estudianteHabilitado.carrera);
+
   const valuesGraduado = [
     estudianteHabilitado.carnet_identidad,
     estudianteHabilitado.nombres,
     estudianteHabilitado.apellidos,
     correoPersonalLimpio,
     'PENDIENTE', // El celular obligatorio se recolecta en la Sección 1 de la encuesta
-    estudianteHabilitado.carrera,
+    carreraNormalizada,
   ];
 
   const graduadoResult = await db.query(queryGraduado, valuesGraduado);
@@ -159,7 +162,7 @@ async function verificarGraduado({ carnet_identidad, nombre_completo, correo_pri
     carnet_identidad: graduadoRegistrado.carnet_identidad,
     nombres: graduadoRegistrado.nombres,
     apellidos: graduadoRegistrado.apellidos,
-    carrera: graduadoRegistrado.carrera,
+    carrera: carreraNormalizada,
     correo_privado: graduadoRegistrado.correo_privado,
     modalidad_titulacion: estudianteHabilitado.modalidad_titulacion,
     gestion_semestre: estudianteHabilitado.gestion_semestre,

@@ -1,66 +1,120 @@
-/* Estilos para la Pantalla de Verificación y Acceso de Graduados (USEI UCB) */
+/* ==========================================================================
+   ESTILOS INSTITUCIONALES - PANTALLA DE VERIFICACIÓN (USEI UCB)
+   Colores Oficiales: Azul Marino UCB (#0a2540), Dorado Heráldico (#f59e0b)
+   Optimizado para Desktop, Tablet y Smartphone
+   ========================================================================== */
 
 .verif-page-wrapper {
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 120px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem 1rem;
-  background-color: #f1f5f9;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 2.5rem 1rem;
+  background: radial-gradient(ellipse at 50% 15%, #184e8e 0%, #0a2540 50%, #051322 100%);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
+/* Efectos de luz ambiental decorativos */
+.verif-page-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.verif-page-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(14, 61, 122, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Tarjeta Principal de Verificación */
 .verif-card {
   width: 100%;
-  max-width: 460px;
+  max-width: 500px;
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 60px -15px rgba(6, 21, 39, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  border-top: 5px solid #f59e0b; /* Acento Dorado Heráldico UCB */
+  position: relative;
+  z-index: 10;
+  animation: fadeIn 0.35s ease-out;
 }
 
 /* Cabecera Azul Institucional */
 .verif-card-header {
-  background: linear-gradient(135deg, #0e3d7a 0%, #1a4f9c 100%);
+  background: linear-gradient(145deg, #071a2f 0%, #0a2540 60%, #0e3d7a 100%);
   color: #ffffff;
-  padding: 1.8rem 1.5rem;
+  padding: 2rem 1.75rem 1.5rem;
   text-align: center;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.verif-card-header h2 {
-  font-size: 1.35rem;
-  font-weight: 700;
+.verif-badge-sede {
+  display: inline-block;
+  background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+  color: #071a2f;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.verif-header-titles h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
   margin-bottom: 0.35rem;
   letter-spacing: -0.3px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.verif-card-header p {
-  font-size: 0.82rem;
-  opacity: 0.9;
+.verif-header-titles p {
+  font-size: 0.85rem;
   margin: 0;
-  color: #e0f2fe;
+  color: #93c5fd;
+  font-weight: 500;
 }
 
 /* Cuerpo de la Tarjeta */
 .verif-card-body {
-  padding: 1.8rem 1.75rem;
+  padding: 2rem 2rem 1.75rem;
 }
 
 /* Cuadro de Advertencia Permanente de Sesión Única */
 .verif-warning-box {
-  background-color: #fffbeb;
-  border: 1px solid #fef3c7;
-  border-left: 4px solid #f59e0b;
-  border-radius: 8px;
-  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #fde68a;
+  border-left: 5px solid #f59e0b;
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
   margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.08);
 }
 
 .verif-warning-title {
   color: #b45309;
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 800;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -70,40 +124,41 @@
 .verif-warning-text {
   color: #78350f;
   font-size: 0.82rem;
-  line-height: 1.4;
+  line-height: 1.45;
   margin: 0;
 }
 
 /* Grupos del Formulario */
 .verif-form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
   text-align: left;
 }
 
 .verif-form-label {
   display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #334155;
-  margin-bottom: 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.4rem;
 }
 
 .verif-input {
   width: 100%;
-  padding: 0.75rem 0.95rem;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  font-size: 0.92rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 16px; /* 16px exactos evita zoom forzado en Safari/iOS */
   color: #0f172a;
-  background-color: #ffffff;
+  background-color: #f8fafc;
   outline: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   box-sizing: border-box;
 }
 
 .verif-input:focus {
+  background-color: #ffffff;
   border-color: #0e3d7a;
-  box-shadow: 0 0 0 3px rgba(14, 61, 122, 0.12);
+  box-shadow: 0 0 0 3.5px rgba(245, 158, 11, 0.22);
 }
 
 .verif-input.input-error {
@@ -113,7 +168,7 @@
 
 .verif-input.input-error:focus {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 0 3.5px rgba(239, 68, 68, 0.18);
 }
 
 .verif-input-hint {
@@ -121,6 +176,7 @@
   font-size: 0.76rem;
   color: #64748b;
   margin-top: 0.35rem;
+  line-height: 1.35;
 }
 
 /* Texto de advertencia para el correo */
@@ -128,37 +184,47 @@
   display: block;
   font-size: 0.78rem;
   color: #dc2626;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 0.4rem;
+  line-height: 1.35;
 }
 
-/* Botón de Validación */
+/* Botón de Validación e Inicio */
 .verif-btn-submit {
   width: 100%;
-  background: #0e3d7a;
+  min-height: 48px; /* Tamaño táctil estándar móvil */
+  background: linear-gradient(145deg, #0e3d7a 0%, #0a2540 100%);
   color: #ffffff;
   border: none;
-  padding: 0.85rem;
-  font-size: 0.98rem;
-  font-weight: 600;
-  border-radius: 8px;
+  border-bottom: 3px solid #f59e0b;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 0.75rem;
+  transition: all 0.25s ease;
+  margin-top: 0.85rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(10, 37, 64, 0.3);
 }
 
 .verif-btn-submit:hover:not(:disabled) {
-  background: #09264c;
-  transform: translateY(-1px);
+  background: linear-gradient(145deg, #154e96 0%, #0e3d7a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(10, 37, 64, 0.45);
+}
+
+.verif-btn-submit:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .verif-btn-submit:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+  border-bottom-color: #94a3b8;
 }
 
 /* Banner de Error General */
@@ -166,7 +232,7 @@
   background-color: #fef2f2;
   border: 1px solid #fecaca;
   color: #991b1b;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 0.85rem 1rem;
   font-size: 0.85rem;
   margin-bottom: 1.25rem;
@@ -179,66 +245,113 @@
 /* Pantalla de Éxito / Bienvenida */
 .verif-success-card {
   text-align: center;
-  padding: 1.5rem 0.5rem;
+  padding: 1.25rem 0.25rem;
+  animation: fadeIn 0.35s ease;
 }
 
 .verif-success-icon {
-  width: 58px;
-  height: 58px;
-  background-color: #d1fae5;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
   color: #059669;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
-  margin: 0 auto 1.25rem;
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin: 0 auto 1.15rem;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
 }
 
 .verif-success-title {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: #065f46;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .verif-student-info {
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-left: 4px solid #0e3d7a;
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
   margin: 1.25rem 0;
   text-align: left;
   font-size: 0.86rem;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .verif-student-info strong {
-  color: #1e293b;
+  color: #0a2540;
 }
 
 .verif-btn-start {
   width: 100%;
-  background: #059669;
+  min-height: 48px;
+  background: linear-gradient(145deg, #059669 0%, #047857 100%);
   color: #ffffff;
   border: none;
-  padding: 0.85rem;
-  font-size: 0.98rem;
-  font-weight: 600;
-  border-radius: 8px;
+  border-bottom: 3px solid #10b981;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
 }
 
 .verif-btn-start:hover {
-  background: #047857;
+  background: linear-gradient(145deg, #047857 0%, #065f46 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(5, 150, 105, 0.45);
 }
 
 /* Pie de la tarjeta */
 .verif-card-footer {
   text-align: center;
-  padding: 1rem 1.5rem 1.5rem;
-  font-size: 0.75rem;
-  color: #94a3b8;
+  padding: 1rem 1.25rem;
+  font-size: 0.76rem;
+  color: #64748b;
   border-top: 1px solid #f1f5f9;
+  background-color: #fafbfd;
+}
+
+/* ==========================================================================
+   OPTIMIZACIONES MÓVILES Y TABLETS
+   ========================================================================== */
+@media (max-width: 640px) {
+  .verif-page-wrapper {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .verif-card {
+    border-radius: 14px;
+  }
+
+  .verif-card-header {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .verif-header-titles h2 {
+    font-size: 1.25rem;
+  }
+
+  .verif-header-titles p {
+    font-size: 0.8rem;
+  }
+
+  .verif-card-body {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .verif-warning-box {
+    padding: 0.85rem 1rem;
+  }
+
+  .verif-input {
+    padding: 0.8rem 0.9rem;
+  }
 }

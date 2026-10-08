@@ -199,17 +199,32 @@ export default function DashboardAdmin() {
           marginBottom: '1.5rem',
         }}
       >
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <span style={{ fontSize: '1.75rem' }}>📊</span>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#0a2540', margin: 0 }}>
-              Tablero Analítico y Tasa de Respuesta USEI
-            </h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ fontSize: '1.4rem' }}>📊</span>
+              <h1 style={{ fontSize: '1.45rem', fontWeight: '800', color: '#0a2540', margin: 0, letterSpacing: '-0.3px' }}>
+                Tablero Analítico de Graduados · USEI
+              </h1>
+              <span
+                style={{
+                  backgroundColor: '#f59e0b',
+                  color: '#0a2540',
+                  fontSize: '0.7rem',
+                  fontWeight: '800',
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: '4px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                BI Real-Time
+              </span>
+            </div>
+            <p style={{ margin: '0.2rem 0 0', color: '#64748b', fontSize: '0.82rem' }}>
+              Monitoreo y Cobertura Frente al Padrón Oficial de Titulación · Actualizado a las{' '}
+              {ultimaActualizacion.toLocaleTimeString('es-BO')}
+            </p>
           </div>
-          <p style={{ margin: '0.25rem 0 0', color: '#64748b', fontSize: '0.85rem' }}>
-            Monitoreo en tiempo real de cobertura frente al padrón de titulación · Actualizado a las{' '}
-            {ultimaActualizacion.toLocaleTimeString('es-BO')}
-          </p>
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
@@ -288,10 +303,11 @@ export default function DashboardAdmin() {
         <div
           style={{
             backgroundColor: '#ffffff',
-            borderRadius: '12px',
-            padding: '1.25rem',
+            borderRadius: '14px',
+            padding: '1.35rem',
             border: '1px solid #e2e8f0',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.03)',
+            borderTop: '4px solid #0e3d7a',
+            boxShadow: '0 4px 12px rgba(10, 37, 64, 0.05)',
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
@@ -301,25 +317,25 @@ export default function DashboardAdmin() {
             style={{
               backgroundColor: '#e0f2fe',
               color: '#0284c7',
-              width: '52px',
-              height: '52px',
-              borderRadius: '10px',
+              width: '54px',
+              height: '54px',
+              borderRadius: '12px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.6rem',
+              fontSize: '1.7rem',
             }}
           >
             👥
           </div>
           <div>
-            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '600', color: '#64748b', textTransform: 'uppercase' }}>
+            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase' }}>
               Total Habilitados
             </p>
-            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.8rem', fontWeight: '800', color: '#0f172a' }}>
+            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.85rem', fontWeight: '800', color: '#0a2540' }}>
               {totalHabilitados}
             </h3>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Padrón Kardex General</span>
+            <span style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>Padrón Kardex General</span>
           </div>
         </div>
 
@@ -327,10 +343,11 @@ export default function DashboardAdmin() {
         <div
           style={{
             backgroundColor: '#ffffff',
-            borderRadius: '12px',
-            padding: '1.25rem',
+            borderRadius: '14px',
+            padding: '1.35rem',
             border: '1px solid #e2e8f0',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.03)',
+            borderTop: '4px solid #16a34a',
+            boxShadow: '0 4px 12px rgba(10, 37, 64, 0.05)',
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
@@ -340,25 +357,25 @@ export default function DashboardAdmin() {
             style={{
               backgroundColor: '#dcfce7',
               color: '#16a34a',
-              width: '52px',
-              height: '52px',
-              borderRadius: '10px',
+              width: '54px',
+              height: '54px',
+              borderRadius: '12px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.6rem',
+              fontSize: '1.7rem',
             }}
           >
             ✅
           </div>
           <div>
-            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '600', color: '#64748b', textTransform: 'uppercase' }}>
+            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase' }}>
               Encuestas Finalizadas
             </p>
-            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.8rem', fontWeight: '800', color: '#16a34a' }}>
+            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.85rem', fontWeight: '800', color: '#16a34a' }}>
               {totalFinalizadas}
             </h3>
-            <span style={{ fontSize: '0.75rem', color: '#16a34a' }}>Certificados Emitidos</span>
+            <span style={{ fontSize: '0.75rem', color: '#16a34a', fontWeight: '600' }}>Certificados Emitidos</span>
           </div>
         </div>
 
@@ -366,10 +383,11 @@ export default function DashboardAdmin() {
         <div
           style={{
             backgroundColor: '#ffffff',
-            borderRadius: '12px',
-            padding: '1.25rem',
+            borderRadius: '14px',
+            padding: '1.35rem',
             border: '1px solid #e2e8f0',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.03)',
+            borderTop: '4px solid #f59e0b',
+            boxShadow: '0 4px 12px rgba(10, 37, 64, 0.05)',
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
@@ -379,39 +397,39 @@ export default function DashboardAdmin() {
             style={{
               backgroundColor: '#fef3c7',
               color: '#d97706',
-              width: '52px',
-              height: '52px',
-              borderRadius: '10px',
+              width: '54px',
+              height: '54px',
+              borderRadius: '12px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.6rem',
+              fontSize: '1.7rem',
             }}
           >
             📈
           </div>
           <div style={{ flex: 1 }}>
-            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '600', color: '#64748b', textTransform: 'uppercase' }}>
+            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase' }}>
               Tasa de Respuesta
             </p>
-            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.8rem', fontWeight: '800', color: '#0e3d7a' }}>
+            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.85rem', fontWeight: '800', color: '#0a2540' }}>
               {tasaPct}%
             </h3>
             <div
               style={{
                 width: '100%',
-                height: '6px',
+                height: '7px',
                 backgroundColor: '#e2e8f0',
                 borderRadius: '999px',
                 overflow: 'hidden',
-                marginTop: '0.35rem',
+                marginTop: '0.45rem',
               }}
             >
               <div
                 style={{
                   width: `${Math.min(100, Math.max(0, tasaPct))}%`,
                   height: '100%',
-                  backgroundColor: tasaPct >= 70 ? '#16a34a' : tasaPct >= 40 ? '#f59e0b' : '#3b82f6',
+                  background: 'linear-gradient(90deg, #0e3d7a 0%, #f59e0b 100%)',
                   transition: 'width 0.5s ease',
                 }}
               />
@@ -423,10 +441,11 @@ export default function DashboardAdmin() {
         <div
           style={{
             backgroundColor: '#ffffff',
-            borderRadius: '12px',
-            padding: '1.25rem',
+            borderRadius: '14px',
+            padding: '1.35rem',
             border: '1px solid #e2e8f0',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.03)',
+            borderTop: '4px solid #dc2626',
+            boxShadow: '0 4px 12px rgba(10, 37, 64, 0.05)',
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
@@ -436,25 +455,25 @@ export default function DashboardAdmin() {
             style={{
               backgroundColor: '#fee2e2',
               color: '#dc2626',
-              width: '52px',
-              height: '52px',
-              borderRadius: '10px',
+              width: '54px',
+              height: '54px',
+              borderRadius: '12px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.6rem',
+              fontSize: '1.7rem',
             }}
           >
             ⏳
           </div>
           <div>
-            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '600', color: '#64748b', textTransform: 'uppercase' }}>
+            <p style={{ margin: 0, fontSize: '0.78rem', fontWeight: '700', color: '#64748b', textTransform: 'uppercase' }}>
               Brecha (Pendientes)
             </p>
-            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.8rem', fontWeight: '800', color: '#dc2626' }}>
+            <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.85rem', fontWeight: '800', color: '#dc2626' }}>
               {brechaPendientes}
             </h3>
-            <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Por titularse sin encuesta</span>
+            <span style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>Sin encuesta registrada</span>
           </div>
         </div>
       </div>
@@ -465,7 +484,7 @@ export default function DashboardAdmin() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
           gap: '1.5rem',
           marginBottom: '2rem',
         }}
@@ -576,13 +595,13 @@ export default function DashboardAdmin() {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.85rem' }}>
             <thead>
-              <tr style={{ backgroundColor: '#f8fafc', color: '#475569', borderBottom: '1px solid #e2e8f0' }}>
-                <th style={{ padding: '0.85rem 1.25rem', fontWeight: '700' }}>Carrera</th>
-                <th style={{ padding: '0.85rem 1rem', fontWeight: '700', textAlign: 'center' }}>Inscritos Kardex</th>
-                <th style={{ padding: '0.85rem 1rem', fontWeight: '700', textAlign: 'center' }}>Encuestas USEI</th>
-                <th style={{ padding: '0.85rem 1rem', fontWeight: '700', textAlign: 'center' }}>Brecha (Pendientes)</th>
-                <th style={{ padding: '0.85rem 1rem', fontWeight: '700', minWidth: '150px' }}>Tasa de Cobertura</th>
-                <th style={{ padding: '0.85rem 1.25rem', fontWeight: '700', textAlign: 'center' }}>Estado</th>
+              <tr style={{ backgroundColor: '#0a2540', color: '#ffffff', borderBottom: '3px solid #f59e0b' }}>
+                <th style={{ padding: '0.95rem 1.25rem', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Carrera</th>
+                <th style={{ padding: '0.95rem 1rem', fontWeight: '700', textAlign: 'center', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Inscritos Kardex</th>
+                <th style={{ padding: '0.95rem 1rem', fontWeight: '700', textAlign: 'center', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Encuestas USEI</th>
+                <th style={{ padding: '0.95rem 1rem', fontWeight: '700', textAlign: 'center', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Brecha (Pendientes)</th>
+                <th style={{ padding: '0.95rem 1rem', fontWeight: '700', minWidth: '150px', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Tasa de Cobertura</th>
+                <th style={{ padding: '0.95rem 1.25rem', fontWeight: '700', textAlign: 'center', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Estado</th>
               </tr>
             </thead>
             <tbody>

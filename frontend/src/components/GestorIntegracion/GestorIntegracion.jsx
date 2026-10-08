@@ -122,11 +122,27 @@ export default function GestorIntegracion() {
 
   return (
     <div className="etl-container">
-      {/* Cabecera institucional */}
       <div className="etl-header">
-        <h1 className="etl-title">Gestor de Integración (Importar Listas USEI)</h1>
+
+        <span
+          style={{
+            backgroundColor: '#f59e0b',
+            color: '#0a2540',
+            fontSize: '0.72rem',
+            fontWeight: '800',
+            padding: '0.2rem 0.6rem',
+            borderRadius: '999px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            display: 'inline-block',
+            marginBottom: '0.5rem',
+          }}
+        >
+          Módulo de Ingesta ETL de Kardex
+        </span>
+        <h1 className="etl-title">Gestor de Integración y Carga de Habilitados</h1>
         <p className="etl-subtitle">
-          Carga de estudiantes habilitados y datos históricos para el acceso a la encuesta
+          Padrón Oficial de Estudiantes para Monitoreo y Acceso a la Encuesta · Sede La Paz
         </p>
       </div>
 

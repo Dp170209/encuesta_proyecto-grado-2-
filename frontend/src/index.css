@@ -1,0 +1,210 @@
+/* ==========================================================================
+   SISTEMA INTEGRADO DE SEGUIMIENTO A GRADUADOS - USEI UCB SAN PABLO
+   SISTEMA DE DISEÑO INSTITUCIONAL Y VARIABLES GLOBALES
+   ========================================================================== */
+
+:root {
+  --ucb-navy-900: #061527;
+  --ucb-navy-800: #0a2540;
+  --ucb-navy-700: #0e3d7a;
+  --ucb-navy-600: #1a569b;
+  --ucb-blue-500: #2563eb;
+  --ucb-blue-400: #38bdf8;
+  --ucb-blue-100: #e0f2fe;
+
+  --ucb-gold-600: #b45309;
+  --ucb-gold-500: #d97706;
+  --ucb-gold-400: #f59e0b;
+  --ucb-gold-300: #fbbf24;
+  --ucb-gold-100: #fef3c7;
+  --ucb-gold-50: #fffbeb;
+
+  --usei-green-500: #10b981;
+  --usei-green-600: #059669;
+
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
+  --border-focus: #0e3d7a;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(10, 37, 64, 0.08);
+  --shadow-lg: 0 12px 28px rgba(10, 37, 64, 0.12);
+  --shadow-xl: 0 20px 40px rgba(6, 21, 39, 0.22);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Transiciones suaves */
+button, input, select, textarea {
+  font-family: inherit;
+  transition: all 0.2s ease-in-out;
+}
+
+/* ==========================================================================
+   ESTILOS DE LA CABECERA GLOBAL INSTITUCIONAL (RESPONSIVE)
+   ========================================================================== */
+.app-header {
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(6, 21, 39, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 1rem;
+}
+
+.app-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.app-logos-container {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.app-logo-card {
+  background-color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.app-header-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.app-header-title-box {
+  border-left: 1.5px solid rgba(245, 158, 11, 0.4);
+  padding-left: 1.1rem;
+}
+
+.app-header-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 0;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Ajustes Responsive para Tablets y Celulares */
+@media (max-width: 820px) {
+  .app-header {
+    padding: 0.65rem 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .app-header-brand {
+    gap: 0.75rem;
+  }
+
+  .app-logo-card {
+    padding: 3px 7px;
+  }
+
+  .app-header-logo-img {
+    height: 30px;
+  }
+
+  .app-header-title-box {
+    padding-left: 0.75rem;
+  }
+
+  .app-header-title {
+    font-size: 0.95rem;
+  }
+
+  .app-header-actions {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .app-header-title {
+    font-size: 0.88rem;
+  }
+
+  .app-header-actions {
+    justify-content: space-between;
+  }
+}
+
+/* Keyframes decorativos */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

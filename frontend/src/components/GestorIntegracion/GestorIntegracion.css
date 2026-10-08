@@ -1,22 +1,28 @@
-/* Estilos para el Gestor de Integración (Módulo ETL) - USEI UCB */
+/* ==========================================================================
+   ESTILOS INSTITUCIONALES - GESTOR DE INTEGRACIÓN ETL (USEI UCB)
+   Colores Oficiales: Azul Marino UCB (#0a2540), Dorado Heráldico (#f59e0b)
+   ========================================================================== */
 
 .etl-container {
-  max-width: 1000px;
-  margin: 2rem auto;
+  max-width: 1080px;
+  margin: 2rem auto 3.5rem;
   padding: 0 1.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #1e293b;
+  animation: fadeIn 0.3s ease;
 }
 
 .etl-header {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .etl-title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #0b2f64;
-  margin-bottom: 0.35rem;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0a2540;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.3px;
 }
 
 .etl-subtitle {
@@ -25,14 +31,15 @@
   margin: 0;
 }
 
-/* Tarjeta principal */
+/* Tarjeta Principal */
 .etl-card {
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(10, 37, 64, 0.08);
   border: 1px solid #e2e8f0;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  border-top: 5px solid #f59e0b; /* Acento Dorado Heráldico UCB */
+  padding: 2.25rem;
+  margin-bottom: 2.5rem;
 }
 
 /* Selector de Gestión */
@@ -40,37 +47,39 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
 }
 
 .etl-filter-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #475569;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0a2540;
 }
 
 .etl-select {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  border: 1px solid #cbd5e1;
+  padding: 0.6rem 1.15rem;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
   background-color: #f8fafc;
-  font-size: 0.9rem;
-  color: #1e293b;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #0f172a;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .etl-select:focus {
   border-color: #0e3d7a;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
 }
 
 /* Zona Drag & Drop */
 .dropzone {
   border: 2px dashed #94a3b8;
-  border-radius: 10px;
-  background: #f8fafc;
-  padding: 2.5rem 1.5rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 3rem 2rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -80,30 +89,37 @@
 .dropzone:hover,
 .dropzone.drag-active {
   border-color: #0e3d7a;
-  background: #f0f6ff;
-  transform: translateY(-1px);
+  background: linear-gradient(180deg, #eff6ff 0%, #e0f2fe 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14, 61, 122, 0.12);
 }
 
 .dropzone-icon {
-  width: 54px;
-  height: 54px;
-  margin: 0 auto 1rem;
-  color: #1858a8;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 1.25rem;
+  color: #0e3d7a;
+  transition: transform 0.25s ease;
+}
+
+.dropzone:hover .dropzone-icon {
+  transform: scale(1.1);
+  color: #f59e0b;
 }
 
 .dropzone-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #1e293b;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0a2540;
   margin-bottom: 0.5rem;
 }
 
 .dropzone-desc {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: #64748b;
-  max-width: 480px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.4;
+  max-width: 520px;
+  margin: 0 auto 1.75rem;
+  line-height: 1.5;
 }
 
 .file-input-hidden {
@@ -112,20 +128,22 @@
 
 .btn-browse {
   display: inline-block;
-  padding: 0.65rem 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
   color: #0e3d7a;
   background: #ffffff;
-  border: 1.5px solid #0e3d7a;
-  border-radius: 6px;
+  border: 2px solid #0e3d7a;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .btn-browse:hover {
   background: #0e3d7a;
   color: #ffffff;
+  transform: translateY(-1px);
 }
 
 /* Fila de archivo seleccionado */
@@ -133,31 +151,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 0.85rem 1.25rem;
-  margin-top: 1.5rem;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-left: 5px solid #0e3d7a;
+  border-radius: 10px;
+  padding: 1rem 1.35rem;
+  margin-top: 1.75rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .file-info {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .file-icon {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 
 .file-name {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: #0a2540;
 }
 
 .file-size {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: #64748b;
   margin-left: 0.5rem;
 }
@@ -165,92 +185,103 @@
 .file-actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .btn-remove {
   background: none;
   border: none;
   color: #ef4444;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   cursor: pointer;
-  padding: 0.4rem 0.6rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  transition: background 0.15s ease;
 }
 
 .btn-remove:hover {
-  text-decoration: underline;
+  background-color: #fee2e2;
+  text-decoration: none;
 }
 
 .btn-upload {
-  background: #0e3d7a;
+  background: linear-gradient(145deg, #0e3d7a 0%, #0a2540 100%);
   color: #ffffff;
   border: none;
-  padding: 0.6rem 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 6px;
+  border-bottom: 2px solid #f59e0b;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px rgba(10, 37, 64, 0.25);
 }
 
 .btn-upload:hover:not(:disabled) {
-  background: #09264c;
+  background: linear-gradient(145deg, #154e96 0%, #0e3d7a 100%);
+  transform: translateY(-1px);
 }
 
 .btn-upload:disabled {
-  opacity: 0.6;
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
 /* Alertas de Estado */
 .alert-box {
-  margin-top: 1.5rem;
-  padding: 1.15rem 1.25rem;
-  border-radius: 8px;
-  font-size: 0.92rem;
+  margin-top: 1.75rem;
+  padding: 1.25rem 1.35rem;
+  border-radius: 10px;
+  font-size: 0.94rem;
   line-height: 1.5;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  animation: fadeIn 0.25s ease;
 }
 
 .alert-success {
   background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  border: 1.5px solid #a7f3d0;
+  border-left: 5px solid #10b981;
   color: #065f46;
 }
 
 .alert-error {
   background: #fef2f2;
-  border: 1px solid #fecaca;
+  border: 1.5px solid #fecaca;
+  border-left: 5px solid #ef4444;
   color: #991b1b;
 }
 
 .alert-title {
-  font-weight: 700;
+  font-weight: 800;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 1rem;
 }
 
 .stats-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
 }
 
 .stat-chip {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .stat-chip strong {
-  color: #065f46;
+  color: #0a2540;
 }
 
 /* Spinner */
@@ -265,26 +296,26 @@
   margin-right: 0.5rem;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
 /* Tabla de Historial */
 .table-section {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .table-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0a2540;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .table-responsive {
   overflow-x: auto;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .etl-table {
@@ -295,16 +326,20 @@
 }
 
 .etl-table th {
-  background: #f8fafc;
-  color: #475569;
-  font-weight: 600;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e2e8f0;
+  background: #0a2540;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.85rem 1.15rem;
+  border-bottom: 2px solid #f59e0b;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .etl-table td {
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.15rem;
   border-bottom: 1px solid #f1f5f9;
+  color: #334155;
 }
 
 .etl-table tr:hover {
@@ -313,10 +348,38 @@
 
 .badge-modalidad {
   display: inline-block;
-  background: #e0f2fe;
-  color: #0369a1;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+/* Responsive Móvil y Tablet */
+@media (max-width: 680px) {
+  .etl-container {
+    padding: 0 0.75rem;
+    margin: 1rem auto 2.5rem;
+  }
+  .etl-card {
+    padding: 1.25rem 1rem;
+    border-radius: 12px;
+  }
+  .etl-title {
+    font-size: 1.35rem;
+  }
+  .dropzone {
+    padding: 2rem 1rem;
+  }
+  .selected-file-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .file-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
 }

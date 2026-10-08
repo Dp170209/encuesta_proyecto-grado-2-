@@ -296,7 +296,14 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
       setLoading(true);
       setErrorValidacion(null);
 
-      const res = await guardarEncuesta(respuestas, 2026);
+      // Garantizar que la carrera y CI sean estrictamente los del estudiante verificado en Kardex
+      const datosConsolidados = {
+        ...respuestas,
+        S1P01_Carrera: graduado?.carrera || respuestas.S1P01_Carrera,
+        S1P11_CI: graduado?.carnet_identidad || respuestas.S1P11_CI,
+      };
+
+      const res = await guardarEncuesta(datosConsolidados, 2026);
       setResultadoEmision(res.data);
       setFinalizada(true);
 
@@ -351,19 +358,33 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
     return (
       <div className="encuesta-page-wrapper">
         <div className="encuesta-card encuesta-success-screen">
+          <div className="success-logos-banner">
+            <div className="success-logo-badge">
+              <img src="/logo_ucb.png" alt="Universidad Católica Boliviana" />
+            </div>
+            <div className="success-logo-badge">
+              <img src="/logo_usei.jpg" alt="USEI" />
+            </div>
+            <div className="success-logo-badge">
+              <img src="/logo_alumni.jpg" alt="Alumni UCB" />
+            </div>
+          </div>
+
           <div className="success-badge-icon">✓</div>
-          <h2 className="success-screen-title">¡Encuesta Finalizada!</h2>
-          <p className="success-screen-desc">Tus respuestas han sido registradas con éxito.</p>
+          <h2 className="success-screen-title">¡Encuesta Finalizada con Éxito!</h2>
+          <p className="success-screen-desc">
+            Felicitaciones {graduado?.nombres || ''}. Tu registro oficial ha sido consolidado en el padrón de titulación.
+          </p>
 
           <div className="success-panels-container">
             {/* Panel: Certificado Enviado */}
             <div className="success-panel-card panel-email">
               <div className="panel-header-title">
                 <span>✉️</span>
-                <span>Certificado Enviado</span>
+                <span>Certificado Oficial Emitido y Enviado</span>
               </div>
               <p className="panel-text">
-                Hemos enviado tu Certificado Oficial (N° USEI-2026-{numCertFormateado}) a tu correo electrónico privado: <strong>{correoPrivadoDestino}</strong>. Adjunto encontrarás información importante para habilitar la firma de tu acta de graduación.
+                Hemos enviado tu Certificado Oficial (N° USEI-2026-{numCertFormateado}) a tu correo personal: <strong>{correoPrivadoDestino}</strong>. El documento cuenta con validez legal para la tramitación de tu titulación y firma de acta.
               </p>
               <button
                 type="button"
@@ -371,7 +392,7 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
                 onClick={handleDescargarPdf}
                 disabled={descargandoPdf}
               >
-                {descargandoPdf ? 'Generando descarga...' : '📥 Descargar copia de Certificado (PDF)'}
+                {descargandoPdf ? 'Generando descarga...' : '📥 Descargar copia de Certificado Oficial (PDF)'}
               </button>
             </div>
 
@@ -379,19 +400,19 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
             <div className="success-panel-card panel-benefit">
               <div className="panel-header-title" style={{ color: '#92400e' }}>
                 <span>🎓</span>
-                <span>Beneficio Alumni UCB</span>
+                <span>Beneficio Exclusivo Alumni UCB</span>
               </div>
               <p className="panel-text" style={{ color: '#78350f' }}>
-                Recuerda que tienes un <strong>10% de descuento</strong> en todos los programas de Postgrado de la Universidad Católica Boliviana.
+                Como graduado de la Universidad Católica Boliviana "San Pablo", cuentas con un <strong>10% de descuento automático</strong> en todos los programas de Postgrado, Maestrías y Diplomados de la universidad.
               </p>
             </div>
           </div>
 
           {/* Sección de Vinculación a WhatsApp por Carrera */}
           <div className="whatsapp-community-section">
-            <h3 className="whatsapp-title">¡Únete a tu comunidad!</h3>
+            <h3 className="whatsapp-title">¡Únete a la Comunidad Alumni de tu Carrera!</h3>
             <p className="whatsapp-desc">
-              Mantente al tanto de ofertas laborales, talleres y networking exclusivo para graduados de <strong>{carreraGraduado}</strong>.
+              Accede a la red de contactos, bolsa de trabajo exclusiva y actividades para graduados de <strong>{carreraGraduado}</strong>.
             </p>
 
             <a
@@ -401,8 +422,18 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
               className="btn-whatsapp-join"
             >
               <span className="btn-whatsapp-icon">💬</span>
-              <span>Unirme al grupo de WhatsApp</span>
+              <span>Unirme a la Comunidad de WhatsApp ({carreraGraduado})</span>
             </a>
+
+            <div style={{ marginTop: '1.25rem' }}>
+              <button
+                type="button"
+                className="btn-finish-return"
+                onClick={onVolverAInicio}
+              >
+                ← Salir y Finalizar Proceso
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -414,8 +445,9 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
   return (
     <div className="encuesta-page-wrapper">
       <div className="encuesta-card">
-        {/* Cabecera */}
+        {/* Cabecera de Sección (Sin logos duplicados, la barra superior es la identidad oficial) */}
         <div className="encuesta-header">
+          <span className="encuesta-badge-paso">Paso {pasoActual} de 4 · Anexo 3</span>
           <h2 className="encuesta-section-title">
             {pasoActual === 1 && 'Sección 1: Identificación y Datos Generales'}
             {pasoActual === 2 && 'Sección 2: Entorno Familiar y Trayectoria Académica'}
@@ -423,23 +455,23 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
             {pasoActual === 4 && 'Sección 4: Situación Laboral y Perspectivas de Postgrado'}
           </h2>
           <p className="encuesta-section-subtitle">
-            Cuestionario Oficial Completo (Anexo 3) · USEI Sede La Paz
+            Cuestionario de Graduación Oficial · Datos confidenciales para trámite de titulación
           </p>
         </div>
 
         {/* Pestañas de las 4 Secciones */}
         <div className="encuesta-steps-nav">
           <div className={`step-tab ${pasoActual === 1 ? 'active' : ''} ${pasoActual > 1 ? 'completed' : ''}`}>
-            1. Generales
+            {pasoActual > 1 ? '✓' : '1.'} 📋 Datos Generales
           </div>
           <div className={`step-tab ${pasoActual === 2 ? 'active' : ''} ${pasoActual > 2 ? 'completed' : ''}`}>
-            2. Familiar / Académico
+            {pasoActual > 2 ? '✓' : '2.'} 🏛️ Trayectoria
           </div>
           <div className={`step-tab ${pasoActual === 3 ? 'active' : ''} ${pasoActual > 3 ? 'completed' : ''}`}>
-            3. Satisfacción UCB
+            {pasoActual > 3 ? '✓' : '3.'} ⭐ Satisfacción
           </div>
           <div className={`step-tab ${pasoActual === 4 ? 'active' : ''}`}>
-            4. Laboral / Postgrado
+            4. 💼 Empleo & Postgrado
           </div>
         </div>
 
@@ -478,30 +510,26 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
                   </select>
                 </div>
 
+                {/* 1.1. Carrera de la que se graduó (BLOQUEADA / NO EDITABLE para mantener integridad Kardex) */}
                 <div className="question-group">
                   <label className="question-label" htmlFor="S1P01_Carrera">
                     1.1. Carrera de la que se graduó <span className="required">*</span>
                   </label>
-                  <select
-                    id="S1P01_Carrera"
-                    name="S1P01_Carrera"
-                    className="form-control-select"
-                    value={respuestas.S1P01_Carrera}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
-                    <option value="Administración de Empresas">Administración de Empresas</option>
-                    <option value="Ingeniería Industrial">Ingeniería Industrial</option>
-                    <option value="Derecho">Derecho</option>
-                    <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
-                    <option value="Psicología">Psicología</option>
-                    <option value="Comunicación Social">Comunicación Social</option>
-                    <option value="Diseño Gráfico">Diseño Gráfico</option>
-                    <option value="Ingeniería Comercial">Ingeniería Comercial</option>
-                    <option value="Ingeniería Civil">Ingeniería Civil</option>
-                    <option value="Ingeniería Ambiental">Ingeniería Ambiental</option>
-                    <option value="Economía">Economía</option>
-                  </select>
+                  <div className="locked-field-container">
+                    <input
+                      id="S1P01_Carrera"
+                      name="S1P01_Carrera"
+                      type="text"
+                      className="form-control-input form-control-locked"
+                      value={respuestas.S1P01_Carrera || 'Ingeniería de Sistemas'}
+                      readOnly
+                      title="Carrera asignada oficialmente por Kardex Académico"
+                    />
+                    <span className="locked-field-badge">🔒 Verificado en Kardex</span>
+                  </div>
+                  <span className="verif-input-hint">
+                    Dato inalterable del padrón de titulación para la emisión del certificado y grupo Alumni UCB.
+                  </span>
                 </div>
               </div>
 

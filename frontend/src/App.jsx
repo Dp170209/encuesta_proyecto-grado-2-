@@ -63,56 +63,57 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f8fafc' }}>
+      {/* Cinta Dorada Heráldica Superior */}
+      <div style={{ height: '4px', background: 'linear-gradient(90deg, #f59e0b 0%, #d97706 50%, #fbbf24 100%)' }} />
+
       {/* ===================================================================
-          1. HEADER NAVEGACIÓN (SEGREGA ROLES SEGÚN MODO ACTIVO)
+          1. HEADER NAVEGACIÓN INSTITUCIONAL UCB & USEI
           =================================================================== */}
       <header
+        className="app-header"
         style={{
-          backgroundColor: modoAdminActivo ? '#091e34' : '#0a2540',
-          color: '#ffffff',
-          padding: '0.85rem 2rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
-          flexWrap: 'wrap',
-          gap: '1rem',
-          borderBottom: modoAdminActivo ? '3px solid #f59e0b' : 'none',
+          background: modoAdminActivo
+            ? 'linear-gradient(135deg, #061527 0%, #0a2540 100%)'
+            : 'linear-gradient(135deg, #071a2f 0%, #0a2540 55%, #0e3d7a 100%)',
+          borderBottom: modoAdminActivo ? '3px solid #f59e0b' : '1px solid rgba(255,255,255,0.08)',
         }}
       >
-        {/* Identidad Institucional */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div
-            style={{
-              backgroundColor: '#f59e0b',
-              color: '#0a2540',
-              fontWeight: '800',
-              padding: '0.4rem 0.8rem',
-              borderRadius: '6px',
-              fontSize: '1rem',
-              letterSpacing: '0.5px',
-            }}
-          >
-            USEI - UCB
+        {/* Identidad Institucional con Logotipos Oficiales UCB y USEI (Único lugar donde van los logos) */}
+        <div className="app-header-brand">
+          <div className="app-logos-container">
+            <div className="app-logo-card">
+              <img
+                src="/logo_ucb.png"
+                alt="Universidad Católica Boliviana San Pablo"
+                className="app-header-logo-img"
+              />
+            </div>
+
+            <div className="app-logo-card">
+              <img
+                src="/logo_usei.jpg"
+                alt="Unidad de Servicios Estudiantiles Integrales"
+                className="app-header-logo-img"
+                style={{ borderRadius: '4px' }}
+              />
+            </div>
           </div>
-          <div>
-            <h2 style={{ fontSize: '1.05rem', fontWeight: '700', color: '#f8fafc', margin: 0 }}>
+
+          <div className="app-header-title-box">
+            <h1 className="app-header-title">
               {modoAdminActivo
-                ? 'Portal de Inteligencia y Gestión Administrativa'
+                ? 'Portal de Inteligencia y Gestión Estratégica USEI'
                 : 'Sistema Integrado de Seguimiento a Graduados'}
-            </h2>
-            <p style={{ fontSize: '0.75rem', color: '#94a3b8', margin: 0 }}>
-              Unidad de Servicios Estudiantiles Integrales · Sede La Paz
-            </p>
+            </h1>
           </div>
         </div>
 
         {/* ===================================================================
-            SI ESTAMOS EN MODO ADMINISTRADOR (PANEL PRIVADO USEI)
+            BOTONES DE NAVEGACIÓN Y PERFIL
             =================================================================== */}
         {modoAdminActivo ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <div className="app-header-actions">
             {/* Pestañas exclusivas del administrador */}
             <button
               onClick={() => setVistaAdmin('dashboard')}
@@ -274,19 +275,49 @@ export default function App() {
       />
 
       {/* ===================================================================
-          3. PIE DE PÁGINA INSTITUCIONAL
+          3. PIE DE PÁGINA INSTITUCIONAL UCB & USEI
           =================================================================== */}
       <footer
         style={{
-          textAlign: 'center',
-          padding: '1.25rem',
-          fontSize: '0.8rem',
-          color: '#64748b',
-          borderTop: '1px solid #e2e8f0',
-          backgroundColor: '#ffffff',
+          backgroundColor: '#0a2540',
+          color: '#cbd5e1',
+          borderTop: '3px solid #f59e0b',
+          padding: '1.75rem 2rem 1.25rem',
+          fontSize: '0.82rem',
         }}
       >
-        © 2026 Universidad Católica Boliviana "San Pablo" · Unidad de Servicios Estudiantiles Integrales (USEI)
+        <div
+          style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '1.25rem',
+          }}
+        >
+          <div>
+            <div style={{ fontWeight: '700', color: '#f8fafc', fontSize: '0.86rem' }}>
+              Universidad Católica Boliviana "San Pablo" · Sede La Paz
+            </div>
+            <div style={{ color: '#93c5fd', fontSize: '0.76rem' }}>
+              Unidad de Servicios Estudiantiles Integrales (USEI) · Sede San Pablo
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'right', minWidth: '220px' }}>
+            <div style={{ color: '#f59e0b', fontWeight: '700', fontSize: '0.8rem' }}>
+              Atención y Soporte Titulación:
+            </div>
+            <div style={{ color: '#cbd5e1', fontSize: '0.76rem' }}>
+              📧 usei.lapaz@ucb.edu.bo · 📞 (+591) 2-2782222
+            </div>
+            <div style={{ color: '#64748b', fontSize: '0.72rem', marginTop: '0.2rem' }}>
+              © 2026 UCB "San Pablo". Todos los derechos reservados.
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

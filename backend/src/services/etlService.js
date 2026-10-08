@@ -1,5 +1,6 @@
 const xlsx = require('xlsx');
 const db = require('../config/db');
+const { normalizarNombreCarrera } = require('../utils/whatsappMap');
 
 /**
  * Normaliza nombres de encabezados eliminando tildes, espacios extras y pasando a minúsculas
@@ -68,7 +69,7 @@ function resolveColumns(row) {
     carnet: carnet !== undefined && carnet !== null ? String(carnet).trim() : null,
     nombres: nombres !== undefined && nombres !== null ? String(nombres).trim() : null,
     apellidos: apellidos !== undefined && apellidos !== null ? String(apellidos).trim() : null,
-    carrera: carrera !== undefined && carrera !== null ? String(carrera).trim() : null,
+    carrera: carrera !== undefined && carrera !== null ? normalizarNombreCarrera(String(carrera).trim()) : null,
     modalidad_titulacion: modalidad !== undefined && modalidad !== null ? String(modalidad).trim() : null,
     gestion_semestre: gestion !== undefined && gestion !== null ? String(gestion).trim() : '',
   };

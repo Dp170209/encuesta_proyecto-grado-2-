@@ -1,7 +1,7 @@
 const db = require('../config/db');
 const pdfService = require('../services/pdfService');
 const emailService = require('../services/emailService');
-const { obtenerEnlaceWhatsApp } = require('../utils/whatsappMap');
+const { obtenerEnlaceWhatsApp, normalizarNombreCarrera } = require('../utils/whatsappMap');
 
 /**
  * Controlador POST /api/encuesta/guardar
@@ -106,7 +106,8 @@ async function guardarRespuestas(req, res) {
 
     // 6. Preparar metadatos para PDF y Comunidad de WhatsApp
     const nombreCompleto = `${req.graduado.nombres || ''} ${req.graduado.apellidos || ''}`.trim();
-    const carrera = req.graduado.carrera || contenido_json.S1P01_Carrera || 'Ingeniería de Sistemas';
+    const carreraRaw = req.graduado.carrera || contenido_json.S1P01_Carrera || 'Ingeniería de Sistemas';
+    const carrera = normalizarNombreCarrera(carreraRaw);
     const correoDestino = req.graduado.correo_privado || contenido_json.S1P09_CorreoElectronico;
     const urlWhatsapp = obtenerEnlaceWhatsApp(carrera);
 

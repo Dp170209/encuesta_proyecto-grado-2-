@@ -1,66 +1,99 @@
-/* Estilos del Formulario Dinámico de Encuesta Completa (USEI - UCB) */
+/* ==========================================================================
+   ESTILOS INSTITUCIONALES - FORMULARIO DE ENCUESTA OFICIAL (USEI - UCB)
+   Colores Institucionales: Azul Marino UCB (#0a2540), Dorado Heráldico (#f59e0b)
+   Diseño 100% Adaptable para Móviles (Smartphones) y Tablets
+   ========================================================================== */
 
 .encuesta-page-wrapper {
-  max-width: 840px;
-  margin: 1.5rem auto 3rem;
+  max-width: 900px;
+  margin: 1.5rem auto 3.5rem;
   padding: 0 1rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #1e293b;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease;
 }
 
 /* Tarjeta Principal */
 .encuesta-card {
   background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px -10px rgba(6, 21, 39, 0.1), 0 0 0 1px #e2e8f0;
+  border-top: 5px solid #f59e0b; /* Acento Dorado Heráldico UCB */
   overflow: hidden;
 }
 
-/* Cabecera Azul de Sección */
+/* Cabecera Azul Institucional */
 .encuesta-header {
-  background: linear-gradient(135deg, #0e3d7a 0%, #1a4f9c 100%);
+  background: linear-gradient(145deg, #071a2f 0%, #0a2540 60%, #0e3d7a 100%);
   color: #ffffff;
-  padding: 1.5rem 1.5rem 1.25rem;
+  padding: 1.75rem 1.75rem 1.35rem;
   text-align: center;
+  position: relative;
+}
+
+.encuesta-badge-paso {
+  display: inline-block;
+  background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+  color: #071a2f;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.55rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .encuesta-section-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .encuesta-section-subtitle {
-  font-size: 0.82rem;
-  color: #e0f2fe;
+  font-size: 0.84rem;
+  color: #93c5fd;
   margin: 0;
+  font-weight: 500;
 }
 
-/* Barra de Pasos / Progreso */
+/* Barra de Pasos / Wizard */
 .encuesta-steps-nav {
   display: flex;
-  background: #0a2540;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: #061527;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.encuesta-steps-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .step-tab {
   flex: 1;
-  padding: 0.75rem 0.5rem;
-  font-size: 0.76rem;
-  font-weight: 600;
+  min-width: 130px;
+  padding: 0.85rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
   color: #94a3b8;
   text-align: center;
-  border-bottom: 3px solid transparent;
+  border-bottom: 3.5px solid transparent;
   white-space: nowrap;
   transition: all 0.2s ease;
+  cursor: default;
 }
 
 .step-tab.active {
   color: #ffffff;
-  border-bottom-color: #38bdf8;
-  background: rgba(255, 255, 255, 0.05);
+  border-bottom-color: #f59e0b; /* Acento Dorado Heráldico UCB */
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .step-tab.completed {
@@ -69,34 +102,45 @@
 
 /* Barra de Progreso Lineal */
 .progress-bar-container {
-  height: 4px;
+  height: 5px;
   background-color: #e2e8f0;
   width: 100%;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #38bdf8, #2563eb);
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #0e3d7a 0%, #38bdf8 50%, #f59e0b 100%);
+  transition: width 0.4s ease;
 }
 
 /* Contenido del Formulario */
 .encuesta-body {
-  padding: 1.75rem 1.75rem 2rem;
+  padding: 2rem 2rem 2.25rem;
 }
 
 /* Divisores de subgrupos */
 .section-subgroup {
   margin-top: 1.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1.5px solid #e2e8f0;
+  border-bottom: 2px solid #e2e8f0;
+  position: relative;
+}
+
+.section-subgroup::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #f59e0b;
 }
 
 .section-subgroup-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #0e3d7a;
+  font-size: 1.08rem;
+  font-weight: 800;
+  color: #0a2540;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -106,41 +150,38 @@
 .form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-@media (max-width: 640px) {
-  .form-row-2 {
-    grid-template-columns: 1fr;
-  }
+  gap: 1.25rem;
 }
 
 /* Alerta de Campos Faltantes */
 .encuesta-alert-error {
   background-color: #fef2f2;
+  border: 1px solid #fecaca;
   border-left: 4px solid #ef4444;
   color: #991b1b;
-  padding: 0.85rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.08);
 }
 
 /* Preguntas del Formulario */
 .question-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.35rem;
 }
 
 .question-label {
   display: block;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #1e293b;
-  margin-bottom: 0.45rem;
-  line-height: 1.35;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
 }
 
 .question-label .required {
@@ -152,14 +193,14 @@
 .form-control-select,
 .form-control-textarea {
   width: 100%;
-  padding: 0.72rem 0.95rem;
+  padding: 0.75rem 0.95rem;
   border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  font-size: 0.9rem;
-  color: #1e293b;
+  border: 1.5px solid #cbd5e1;
+  font-size: 0.92rem;
+  color: #0f172a;
   background-color: #ffffff;
   outline: none;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
@@ -167,7 +208,36 @@
 .form-control-select:focus,
 .form-control-textarea:focus {
   border-color: #0e3d7a;
-  box-shadow: 0 0 0 3px rgba(14, 61, 122, 0.12);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.22);
+}
+
+/* Campos Bloqueados / No Editables (Kardex) */
+.locked-field-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-control-locked {
+  background-color: #f1f5f9 !important;
+  color: #0a2540 !important;
+  font-weight: 700 !important;
+  border-color: #cbd5e1 !important;
+  cursor: not-allowed;
+  padding-right: 140px !important;
+}
+
+.locked-field-badge {
+  position: absolute;
+  right: 10px;
+  background-color: #0a2540;
+  color: #f59e0b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 /* Radio buttons & Checkboxes */
@@ -175,7 +245,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
 .radio-group-inline {
@@ -183,29 +253,30 @@
   flex-direction: row;
   gap: 1.25rem;
   flex-wrap: wrap;
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
 .radio-option {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   font-size: 0.88rem;
   color: #334155;
   cursor: pointer;
-  padding: 0.35rem 0.5rem;
-  border-radius: 6px;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
   transition: background-color 0.15s;
+  user-select: none;
 }
 
 .radio-option:hover {
-  background-color: #f8fafc;
+  background-color: #f1f5f9;
 }
 
 .radio-option input[type="radio"],
 .radio-option input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   accent-color: #0e3d7a;
   cursor: pointer;
 }
@@ -213,132 +284,67 @@
 /* Bloque Condicional Destacado */
 .conditional-box {
   background-color: #f8fafc;
-  border: 1.5px dashed #38bdf8;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  margin-top: 0.75rem;
-  animation: fadeIn 0.25s ease-in-out;
-}
-
-.conditional-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #0284c7;
-  background: #e0f2fe;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Tabla Matriz (Likert Table) para Competencias y Servicios */
-.matrix-container {
-  overflow-x: auto;
+  border-left: 4px solid #38bdf8;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  margin-bottom: 1.5rem;
-  background: #ffffff;
+  padding: 1.15rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
+/* Tablas Matrices de Satisfacción */
 .matrix-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: center;
-  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.86rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
 }
 
 .matrix-table th {
-  background: #f8fafc;
-  color: #334155;
-  font-weight: 600;
-  padding: 0.75rem 0.6rem;
-  border-bottom: 1.5px solid #e2e8f0;
+  background-color: #0a2540;
+  color: #ffffff;
+  padding: 0.75rem 0.65rem;
+  font-weight: 700;
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .matrix-table th:first-child {
   text-align: left;
   padding-left: 1rem;
-  width: 48%;
 }
 
 .matrix-table td {
-  padding: 0.7rem 0.5rem;
+  padding: 0.75rem 0.65rem;
   border-bottom: 1px solid #f1f5f9;
-  vertical-align: middle;
+  text-align: center;
+  color: #334155;
 }
 
 .matrix-table td:first-child {
   text-align: left;
   padding-left: 1rem;
-  color: #1e293b;
   font-weight: 500;
+  color: #1e293b;
 }
 
-.matrix-table tr:hover {
+.matrix-table tr:nth-child(even) {
   background-color: #f8fafc;
 }
 
+.matrix-table tr:hover {
+  background-color: #f0f6ff;
+}
+
 .matrix-table input[type="radio"] {
+  accent-color: #0e3d7a;
   width: 18px;
   height: 18px;
-  accent-color: #0e3d7a;
   cursor: pointer;
-}
-
-/* Tarjeta Likert para Aspectos Generales */
-.likert-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0.9rem;
-  margin-bottom: 0.9rem;
-}
-
-.likert-title {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #334155;
-  margin-bottom: 0.65rem;
-}
-
-.likert-options-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-  text-align: center;
-}
-
-@media (max-width: 600px) {
-  .likert-options-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.likert-option-box {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  padding: 0.5rem 0.25rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.78rem;
-  color: #475569;
-}
-
-.likert-option-box.selected {
-  border-color: #0e3d7a;
-  background-color: #eff6ff;
-  color: #0e3d7a;
-  font-weight: 600;
 }
 
 /* Botones de Navegación */
@@ -346,93 +352,110 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid #e2e8f0;
 }
 
 .btn-nav-back {
-  background: #ffffff;
+  background-color: #ffffff;
   color: #475569;
-  border: 1px solid #cbd5e1;
-  padding: 0.65rem 1.4rem;
-  font-size: 0.9rem;
+  border: 1.5px solid #cbd5e1;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.92rem;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  min-height: 46px;
 }
 
-.btn-nav-back:hover {
-  background: #f1f5f9;
+.btn-nav-back:hover:not(:disabled) {
+  background-color: #f1f5f9;
   color: #1e293b;
 }
 
 .btn-nav-next {
-  background: #0e3d7a;
+  background: linear-gradient(145deg, #0e3d7a 0%, #0a2540 100%);
   color: #ffffff;
   border: none;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.92rem;
-  font-weight: 600;
-  border-radius: 6px;
+  border-bottom: 2px solid #f59e0b;
+  padding: 0.85rem 1.85rem;
+  font-size: 0.96rem;
+  font-weight: 700;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px rgba(10, 37, 64, 0.25);
+  min-height: 46px;
 }
 
 .btn-nav-next:hover:not(:disabled) {
-  background: #09264c;
+  background: linear-gradient(145deg, #154e96 0%, #0e3d7a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(10, 37, 64, 0.35);
 }
 
 .btn-nav-finish {
-  background: #059669;
+  background: linear-gradient(145deg, #059669 0%, #047857 100%);
   color: #ffffff;
   border: none;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.92rem;
-  font-weight: 600;
-  border-radius: 6px;
+  border-bottom: 3px solid #10b981;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+  min-height: 46px;
 }
 
 .btn-nav-finish:hover:not(:disabled) {
-  background: #047857;
+  background: linear-gradient(145deg, #047857 0%, #065f46 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(5, 150, 105, 0.45);
 }
 
-/* Pantalla de Éxito y Vinculación Alumni (Figura 35) */
+/* =========================================================================
+   PANTALLA DE ÉXITO Y CELEBRACIÓN (FIGURA 35 - HU-04)
+   ========================================================================= */
 .encuesta-success-screen {
-  text-align: center;
   padding: 2.5rem 1.5rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
 }
 
 .success-badge-icon {
-  width: 70px;
-  height: 70px;
-  background: #10b981;
-  color: #ffffff;
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #059669;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin: 0 auto 1.25rem;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  font-size: 2.1rem;
+  font-weight: 800;
+  margin: 0 auto 1.15rem;
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.25);
+  border: 3px solid #ffffff;
 }
 
 .success-screen-title {
-  color: #065f46;
-  font-size: 1.65rem;
+  font-size: 1.55rem;
   font-weight: 800;
-  margin-bottom: 0.35rem;
+  color: #065f46;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.3px;
 }
 
 .success-screen-desc {
+  font-size: 0.92rem;
   color: #475569;
-  font-size: 0.95rem;
-  margin-bottom: 1.75rem;
+  max-width: 580px;
+  margin: 0 auto 1.75rem;
+  line-height: 1.5;
 }
 
 /* Tarjetas Informativas de Éxito */
@@ -440,59 +463,62 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 520px;
-  margin: 0 auto 2rem;
+  max-width: 560px;
+  margin: 0 auto 1.75rem;
   text-align: left;
 }
 
 .success-panel-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 1.15rem 1.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.35rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
 }
 
 .success-panel-card.panel-email {
-  border-left: 4px solid #0e3d7a;
+  border-left: 5px solid #0e3d7a;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
 }
 
 .success-panel-card.panel-benefit {
-  border-left: 4px solid #f59e0b;
-  background-color: #fffbeb;
+  border-left: 5px solid #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-color: #fde68a;
 }
 
 .panel-header-title {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 0.35rem;
+  color: #0a2540;
+  margin-bottom: 0.4rem;
 }
 
 .panel-text {
-  font-size: 0.84rem;
-  color: #475569;
-  line-height: 1.45;
+  font-size: 0.86rem;
+  color: #334155;
+  line-height: 1.5;
   margin: 0;
 }
 
 /* Sección de Vinculación a WhatsApp */
 .whatsapp-community-section {
   background: linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 100%);
-  border: 1.5px solid #a7f3d0;
-  border-radius: 12px;
-  padding: 1.75rem 1.5rem;
-  max-width: 520px;
+  border: 2px solid #a7f3d0;
+  border-radius: 14px;
+  padding: 1.75rem 1.25rem;
+  max-width: 560px;
   margin: 0 auto 1.5rem;
   text-align: center;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.08);
 }
 
 .whatsapp-title {
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #065f46;
   margin-bottom: 0.4rem;
 }
@@ -501,7 +527,7 @@
   font-size: 0.86rem;
   color: #047857;
   margin-bottom: 1.25rem;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 /* Botón Grande de WhatsApp */
@@ -509,24 +535,25 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  background-color: #25d366;
+  gap: 0.65rem;
+  background: linear-gradient(145deg, #25d366 0%, #1eb956 100%);
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  padding: 0.9rem 1.75rem;
-  border-radius: 30px;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
   transition: all 0.25s ease;
   cursor: pointer;
   border: none;
+  min-height: 48px;
 }
 
 .btn-whatsapp-join:hover {
-  background-color: #1eb956;
+  background: linear-gradient(145deg, #1eb956 0%, #169e46 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.55);
   color: #ffffff;
 }
 
@@ -538,20 +565,170 @@
 .btn-download-pdf-copy {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   background: #ffffff;
   color: #0e3d7a;
   border: 1.5px solid #0e3d7a;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.86rem;
+  font-weight: 700;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: 0.75rem;
+  margin-top: 0.85rem;
+  min-height: 44px;
 }
 
 .btn-download-pdf-copy:hover {
   background-color: #0e3d7a;
   color: #ffffff;
+  box-shadow: 0 3px 8px rgba(14, 61, 122, 0.2);
+}
+
+.btn-finish-return {
+  background-color: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 42px;
+}
+
+.btn-finish-return:hover {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+/* =========================================================================
+   ADAPTACIONES RESPONSIVE PARA SMARTPHONES Y TABLETS (< 768px)
+   ========================================================================= */
+@media (max-width: 768px) {
+  .encuesta-page-wrapper {
+    margin: 0.75rem auto 2.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .encuesta-card {
+    border-radius: 12px;
+  }
+
+  .encuesta-header {
+    padding: 1.35rem 1rem 1.15rem;
+  }
+
+  .encuesta-section-title {
+    font-size: 1.15rem;
+  }
+
+  .encuesta-section-subtitle {
+    font-size: 0.78rem;
+  }
+
+  .encuesta-body {
+    padding: 1.25rem 0.95rem 1.75rem;
+  }
+
+  .form-row-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Entradas táctiles con tamaño mínimo para evitar zoom en iOS Safari */
+  .form-control-input,
+  .form-control-select,
+  .form-control-textarea {
+    font-size: 16px;
+    padding: 0.85rem 0.9rem;
+  }
+
+  .locked-field-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .form-control-locked {
+    padding-right: 0.9rem !important;
+  }
+
+  .locked-field-badge {
+    position: static;
+    font-size: 0.72rem;
+  }
+
+  /* Opciones de radio como tarjetas táctiles grandes */
+  .radio-group-inline {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .radio-option {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    min-height: 44px;
+  }
+
+  .radio-option:active {
+    background-color: #e0f2fe;
+    border-color: #0e3d7a;
+  }
+
+  .radio-option input[type="radio"],
+  .radio-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Tabla matriz con scroll horizontal táctil suave */
+  .matrix-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .matrix-table th,
+  .matrix-table td {
+    padding: 0.65rem 0.5rem;
+  }
+
+  .matrix-table input[type="radio"] {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Botones de acción ocupan ancho completo y son fáciles de pulsar con el pulgar */
+  .encuesta-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .btn-nav-next,
+  .btn-nav-finish,
+  .btn-nav-back {
+    width: 100%;
+    text-align: center;
+    padding: 0.9rem;
+    font-size: 1rem;
+  }
+
+  .btn-whatsapp-join {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 0.92rem;
+    box-sizing: border-box;
+  }
+
+  .btn-download-pdf-copy {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
