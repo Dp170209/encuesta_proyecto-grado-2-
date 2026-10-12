@@ -10,6 +10,7 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
   });
 
   const [correoInvalido, setCorreoInvalido] = useState(false);
+  const [avisoCorreo, setAvisoCorreo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [errorGeneral, setErrorGeneral] = useState(null);
   const [estudianteVerificado, setEstudianteVerificado] = useState(null);
@@ -24,12 +25,30 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
       [name]: value,
     }));
 
-    // Validación reactiva inmediata para rechazar dominio institucional
+    // Validación reactiva inmediata para el correo electrónico
     if (name === 'correo_privado') {
-      const lower = value.toLowerCase();
-      if (lower.includes('@ucb.edu.bo')) {
+      const lower = value.toLowerCase().trim();
+
+      if (lower.includes(',')) {
+        setAvisoCorreo("⚠️ Detectamos una coma ',' en lugar de un punto. Corríjalo (ej. @gmail.com).");
+        setCorreoInvalido(true);
+      } else if (lower.includes('@ucb.edu.bo')) {
+        setAvisoCorreo('⚠️ No se permiten correos académicos @ucb.edu.bo. Ingrese un correo personal.');
+        setCorreoInvalido(true);
+      } else if (/@(gmai\.com|gamil\.com|gmial\.com|gmaill\.com|gmail\.con|gmail\.co|gemail\.com)/.test(lower)) {
+        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @gmail.com?');
+        setCorreoInvalido(true);
+      } else if (/@(hotmial\.com|hotmai\.com|hotmail\.con|hormail\.com)/.test(lower)) {
+        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @hotmail.com?');
+        setCorreoInvalido(true);
+      } else if (/@(outlok\.com|outloo\.com|outlook\.con)/.test(lower)) {
+        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @outlook.com?');
+        setCorreoInvalido(true);
+      } else if (/@(yaho\.com|yahoo\.con)/.test(lower)) {
+        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @yahoo.com?');
         setCorreoInvalido(true);
       } else {
+        setAvisoCorreo(null);
         setCorreoInvalido(false);
       }
     }
@@ -45,12 +64,29 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
       setErrorGeneral('Por favor ingrese su Carnet de Identidad.');
       return;
     }
-    if (!formData.nombre_completo.trim()) {
-      setErrorGeneral('Por favor ingrese sus Nombres y Apellidos.');
+
+    // Validación de nombres y apellidos completos
+    const palabrasNombre = formData.nombre_completo
+      .trim()
+      .split(/\s+/)
+      .filter((w) => w.length >= 2);
+
+    if (palabrasNombre.length < 2) {
+      setErrorGeneral(
+        'Debe ingresar sus nombres y apellidos completos (al menos un nombre y un apellido tal como figuran en Kardex).'
+      );
       return;
     }
+
     if (!formData.correo_privado.trim()) {
       setErrorGeneral('Por favor ingrese un correo electrónico personal.');
+      return;
+    }
+
+    if (formData.correo_privado.includes(',')) {
+      setErrorGeneral(
+        "El correo no puede contener comas ','. Debe escribir un punto '.' (ejemplo: usuario@gmail.com)."
+      );
       return;
     }
 
@@ -199,12 +235,12 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
                   disabled={loading}
                   autoComplete="off"
                 />
-                {correoInvalido && (
+                {avisoCorreo && (
                   <span className="verif-mail-warning">
-                    ⚠️ No se permiten correos @ucb.edu.bo. Ingrese una dirección privada para recibir su certificado.
+                    {avisoCorreo}
                   </span>
                 )}
-                {!correoInvalido && (
+                {!avisoCorreo && (
                   <span className="verif-input-hint">
                     Aquí se enviará de forma inmediata su Certificado Oficial de Graduación en PDF.
                   </span>
