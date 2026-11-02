@@ -146,6 +146,83 @@ Universidad Católica Boliviana "San Pablo" - Sede La Paz`;
   }
 }
 
+/**
+ * Envía un correo recordatorio formal e institucional al estudiante habilitado
+ * que aún no ha completado la encuesta obligatoria de graduación.
+ */
+async function enviarRecordatorioEncuesta({ destinatario, nombreCompleto, carnetIdentidad, linkEncuesta, carrera }) {
+  try {
+    const transport = getTransporter();
+    const remitente = process.env.SMTP_USER || process.env.SMTP_FROM || 'usei.lapaz@ucb.edu.bo';
+    const enlace = linkEncuesta || 'http://localhost:5173';
+    const nombreCarrera = carrera || 'tu carrera';
+
+    const cuerpoTexto = `Estimado(a) ${nombreCompleto || 'Estudiante'}:
+
+Recibe un cordial saludo de la Unidad de Servicios Estudiantiles Integrales (USEI) de la Universidad Católica Boliviana "San Pablo".
+
+Te recordamos que te encuentras en la nómina oficial de habilitados para el proceso de titulación en la carrera de ${nombreCarrera} (CI: ${carnetIdentidad}).
+
+Para continuar con la programación de tu defensa de grado y firma de acta, es requisito institucional completar la "Encuesta a Tiempo de Graduación". Al finalizarla, el sistema generará automáticamente tu Certificado Oficial de Cumplimiento en PDF y te lo enviará por correo.
+
+Puedes ingresar a completar la encuesta en el siguiente enlace:
+${enlace}
+
+Ten a mano tu Carnet de Identidad y un correo personal activo para recibir tu certificado digital.
+
+Atentamente,
+Unidad de Servicios Estudiantiles Integrales (USEI)
+Universidad Católica Boliviana "San Pablo" · Sede La Paz`;
+
+    const cuerpoHtml = `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+        <div style="background-color: #0e3d7a; color: #ffffff; padding: 22px; text-align: center;">
+          <h2 style="margin: 0; font-size: 20px; font-weight: 700;">Universidad Católica Boliviana "San Pablo"</h2>
+          <p style="margin: 5px 0 0; font-size: 13px; color: #f59e0b; font-weight: 600;">Unidad de Servicios Estudiantiles Integrales (USEI) · Sede La Paz</p>
+        </div>
+        <div style="padding: 26px;">
+          <p style="font-size: 15px; margin-top: 0;">Estimado(a) <strong>${nombreCompleto || 'Estudiante'}</strong>:</p>
+          <p style="color: #475569; font-size: 14px;">
+            Te recordamos que te encuentras en la nómina de habilitados para la obtención de tu título profesional en la carrera de <strong>${nombreCarrera}</strong>.
+          </p>
+          <div style="background-color: #f8fafc; border-left: 4px solid #f59e0b; padding: 14px; margin: 18px 0; border-radius: 4px;">
+            <p style="margin: 0; color: #0f172a; font-size: 13.5px;">
+              <strong>Requisito Institucional de Titulación:</strong> Completar la <em>Encuesta a Tiempo de Graduación</em> es necesario para la emisión de tu <strong>Certificado Oficial USEI</strong> requerido para tu defensa de grado y acta de graduación.
+            </p>
+          </div>
+          <div style="text-align: center; margin: 26px 0;">
+            <a href="${enlace}" target="_blank" rel="noopener noreferrer" style="background-color: #0e3d7a; color: #ffffff; padding: 13px 26px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 14px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              Completar Encuesta de Graduación →
+            </a>
+          </div>
+          <div style="border-top: 1px solid #e2e8f0; padding-top: 14px; margin-top: 22px; font-size: 12px; color: #64748b;">
+            <p style="margin: 0;"><strong>Carnet de Identidad registrado:</strong> ${carnetIdentidad}</p>
+            <p style="margin: 4px 0 0;">Si ya completaste la encuesta recientemente, por favor desestima este mensaje.</p>
+          </div>
+        </div>
+        <div style="background-color: #f1f5f9; padding: 12px 20px; font-size: 11.5px; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0;">
+          USEI La Paz · Av. 14 de Septiembre N° 4807, Obrajes · usei.lapaz@ucb.edu.bo
+        </div>
+      </div>
+    `;
+
+    const info = await transport.sendMail({
+      from: `"USEI - UCB La Paz" <${remitente}>`,
+      to: destinatario,
+      subject: `Recordatorio: Encuesta Oficial a Tiempo de Graduación - USEI U.C.B. (${nombreCompleto})`,
+      text: cuerpoTexto,
+      html: cuerpoHtml,
+    });
+
+    console.log(`[SMTP USEI Recordatorio] Correo enviado exitosamente a: ${destinatario}`);
+    return { exito: true, messageId: info.messageId };
+  } catch (err) {
+    console.error(`[SMTP USEI Error] Falló el recordatorio a ${destinatario}:`, err.message);
+    throw new Error(`No se pudo enviar el correo a ${destinatario}: ${err.message}`);
+  }
+}
+
 module.exports = {
   enviarCertificadoGraduado,
+  enviarRecordatorioEncuesta,
 };

@@ -3,8 +3,10 @@ import GestorIntegracion from './components/GestorIntegracion/GestorIntegracion'
 import VerificacionAcceso from './components/VerificacionAcceso/VerificacionAcceso';
 import EncuestaForm from './components/Encuesta/EncuestaForm';
 import DashboardAdmin from './components/Admin/DashboardAdmin';
+import RespuestasEstudiantes from './components/Admin/RespuestasEstudiantes';
+import EstudiantesPendientes from './components/Admin/EstudiantesPendientes';
 import LoginAdminModal from './components/Admin/LoginAdminModal';
-import { getGraduadoSesion, cerrarSesion } from './services/authApi';
+import { cerrarSesion } from './services/authApi';
 import { getAdminSesion, cerrarSesionAdmin } from './services/adminApi';
 
 export default function App() {
@@ -14,21 +16,29 @@ export default function App() {
   // Estado para el flujo de Administrador (USEI)
   const [sesionAdmin, setSesionAdmin] = useState(null);
   const [modoAdminActivo, setModoAdminActivo] = useState(false);
-  const [vistaAdmin, setVistaAdmin] = useState('dashboard'); // 'dashboard' (HU-05) | 'etl' (HU-01)
+  const [vistaAdmin, setVistaAdmin] = useState('dashboard'); // 'dashboard' | 'etl' | 'respuestas' | 'pendientes'
   const [modalAdminAbierto, setModalAdminAbierto] = useState(false);
 
   useEffect(() => {
-    // Restaurar sesión de graduado si existe
-    const graduado = getGraduadoSesion();
-    if (graduado) {
-      setSesionGraduado(graduado);
-    }
+    // REGLA: Cada vez que el estudiante salga o recargue la página, el proceso se reinicia desde cero
+    cerrarSesion();
+    setSesionGraduado(null);
 
-    // Restaurar sesión de administrador si existe
+    // Restaurar únicamente la sesión administrativa si existe
     const admin = getAdminSesion();
     if (admin) {
       setSesionAdmin(admin);
     }
+
+    // Limpieza obligatoria si el usuario cierra la ventana o sale de la pestaña
+    const handleBeforeUnload = () => {
+      cerrarSesion();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
 
   // Manejadores para el Graduado
@@ -113,7 +123,7 @@ export default function App() {
             BOTONES DE NAVEGACIÓN Y PERFIL
             =================================================================== */}
         {modoAdminActivo ? (
-          <div className="app-header-actions">
+          <div className="app-header-actions" style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', alignItems: 'center' }}>
             {/* Pestañas exclusivas del administrador */}
             <button
               onClick={() => setVistaAdmin('dashboard')}
@@ -121,18 +131,15 @@ export default function App() {
                 backgroundColor: vistaAdmin === 'dashboard' ? '#0e3d7a' : 'transparent',
                 color: '#ffffff',
                 border: vistaAdmin === 'dashboard' ? '1.5px solid #38bdf8' : '1px solid #475569',
-                padding: '0.45rem 0.95rem',
+                padding: '0.45rem 0.85rem',
                 borderRadius: '6px',
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 fontWeight: '700',
                 cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem',
                 transition: 'all 0.2s',
               }}
             >
-              📊 1. Dashboard Analítico (HU-05)
+              1. Estadísticas y Reportes
             </button>
 
             <button
@@ -141,18 +148,49 @@ export default function App() {
                 backgroundColor: vistaAdmin === 'etl' ? '#0e3d7a' : 'transparent',
                 color: '#ffffff',
                 border: vistaAdmin === 'etl' ? '1.5px solid #38bdf8' : '1px solid #475569',
-                padding: '0.45rem 0.95rem',
+                padding: '0.45rem 0.85rem',
                 borderRadius: '6px',
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 fontWeight: '700',
                 cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.4rem',
                 transition: 'all 0.2s',
               }}
             >
-              📁 2. Gestor ETL Kardex (HU-01)
+              2. Cargar Estudiantes
+            </button>
+
+            <button
+              onClick={() => setVistaAdmin('respuestas')}
+              style={{
+                backgroundColor: vistaAdmin === 'respuestas' ? '#0e3d7a' : 'transparent',
+                color: '#ffffff',
+                border: vistaAdmin === 'respuestas' ? '1.5px solid #38bdf8' : '1px solid #475569',
+                padding: '0.45rem 0.85rem',
+                borderRadius: '6px',
+                fontSize: '0.82rem',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              3. Respuestas de Estudiantes
+            </button>
+
+            <button
+              onClick={() => setVistaAdmin('pendientes')}
+              style={{
+                backgroundColor: vistaAdmin === 'pendientes' ? '#0e3d7a' : 'transparent',
+                color: '#ffffff',
+                border: vistaAdmin === 'pendientes' ? '1.5px solid #38bdf8' : '1px solid #475569',
+                padding: '0.45rem 0.85rem',
+                borderRadius: '6px',
+                fontSize: '0.82rem',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              4. Estudiantes Pendientes
             </button>
 
             {/* Badge de Administrador y Salir */}
@@ -160,9 +198,9 @@ export default function App() {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.6rem',
-                marginLeft: '0.5rem',
-                paddingLeft: '0.75rem',
+                gap: '0.5rem',
+                marginLeft: '0.35rem',
+                paddingLeft: '0.65rem',
                 borderLeft: '1px solid #334155',
               }}
             >
@@ -173,7 +211,7 @@ export default function App() {
                   fontWeight: '600',
                 }}
               >
-                👤 {sesionAdmin?.nombre_completo || 'Admin'}
+                {sesionAdmin?.nombre_completo || 'Administrador'}
               </span>
 
               <button
@@ -182,14 +220,14 @@ export default function App() {
                   backgroundColor: 'rgba(239, 68, 68, 0.15)',
                   color: '#fca5a5',
                   border: '1px solid #ef4444',
-                  padding: '0.4rem 0.75rem',
+                  padding: '0.35rem 0.65rem',
                   borderRadius: '6px',
-                  fontSize: '0.8rem',
+                  fontSize: '0.78rem',
                   fontWeight: '600',
                   cursor: 'pointer',
                 }}
               >
-                Cerrar Sesión Admin
+                Cerrar Sesión
               </button>
             </div>
           </div>
@@ -235,7 +273,7 @@ export default function App() {
                 transition: 'all 0.2s',
               }}
             >
-              🔐 Portal Administrativo USEI
+              Portal Administrativo USEI
             </button>
           </div>
         )}
@@ -247,11 +285,12 @@ export default function App() {
       <main style={{ flex: 1, backgroundColor: '#f1f5f9' }}>
         {modoAdminActivo ? (
           /* VISTA ADMINISTRADOR */
-          vistaAdmin === 'dashboard' ? (
-            <DashboardAdmin />
-          ) : (
-            <GestorIntegracion />
-          )
+          <>
+            {vistaAdmin === 'dashboard' && <DashboardAdmin />}
+            {vistaAdmin === 'etl' && <GestorIntegracion />}
+            {vistaAdmin === 'respuestas' && <RespuestasEstudiantes />}
+            {vistaAdmin === 'pendientes' && <EstudiantesPendientes />}
+          </>
         ) : (
           /* VISTA GRADUADO (FLUJO PÚBLICO) */
           sesionGraduado ? (

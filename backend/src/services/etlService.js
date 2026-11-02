@@ -65,6 +65,13 @@ function resolveColumns(row) {
     normalized.semestre ||
     '';
 
+  const correo =
+    normalized.correo_institucional ||
+    normalized.correo ||
+    normalized.email ||
+    normalized.email_institucional ||
+    normalized.correo_ucb;
+
   return {
     carnet: carnet !== undefined && carnet !== null ? String(carnet).trim() : null,
     nombres: nombres !== undefined && nombres !== null ? String(nombres).trim() : null,
@@ -72,6 +79,7 @@ function resolveColumns(row) {
     carrera: carrera !== undefined && carrera !== null ? normalizarNombreCarrera(String(carrera).trim()) : null,
     modalidad_titulacion: modalidad !== undefined && modalidad !== null ? String(modalidad).trim() : null,
     gestion_semestre: gestion !== undefined && gestion !== null ? String(gestion).trim() : '',
+    correo_institucional: correo !== undefined && correo !== null ? String(correo).trim().toLowerCase() : null,
   };
 }
 
@@ -154,6 +162,10 @@ async function procesarArchivoHabilitados(fileBuffer, defaultGestion = '2026-1')
     }
     carnetsEnArchivo.add(item.carnet);
 
+    const correoInst =
+      item.correo_institucional ||
+      `${item.nombres.split(' ')[0].toLowerCase()}.${item.apellidos.split(' ')[0].toLowerCase()}@ucb.edu.bo`.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
     estudiantesValidados.push({
       carnet_identidad: item.carnet,
       nombres: item.nombres,
@@ -161,6 +173,7 @@ async function procesarArchivoHabilitados(fileBuffer, defaultGestion = '2026-1')
       carrera: item.carrera,
       modalidad_titulacion: item.modalidad_titulacion || 'Tesis',
       gestion_semestre: item.gestion_semestre || defaultGestion,
+      correo_institucional: correoInst,
     });
   }
 
@@ -202,7 +215,7 @@ async function procesarArchivoHabilitados(fileBuffer, defaultGestion = '2026-1')
 
       for (const item of paraInsertar) {
         chunks.push(
-          `($${paramCounter++}, $${paramCounter++}, $${paramCounter++}, $${paramCounter++}, $${paramCounter++}, $${paramCounter++})`
+          `($${paramCounter++}, $${paramCounter++}, $${paramCounter++}, $${paramCounter++}, $${paramCounter++}, $${paramCounter++}, $${paramCounter++})`
         );
         values.push(
           item.carnet_identidad,
@@ -210,13 +223,14 @@ async function procesarArchivoHabilitados(fileBuffer, defaultGestion = '2026-1')
           item.apellidos,
           item.carrera,
           item.modalidad_titulacion,
-          item.gestion_semestre
+          item.gestion_semestre,
+          item.correo_institucional
         );
       }
 
       const queryText = `
         INSERT INTO estudiantes_habilitados 
-        (carnet_identidad, nombres, apellidos, carrera, modalidad_titulacion, gestion_semestre)
+        (carnet_identidad, nombres, apellidos, carrera, modalidad_titulacion, gestion_semestre, correo_institucional)
         VALUES ${chunks.join(', ')}
       `;
 

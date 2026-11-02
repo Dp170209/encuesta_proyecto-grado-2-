@@ -138,11 +138,11 @@ export default function GestorIntegracion() {
             marginBottom: '0.5rem',
           }}
         >
-          Módulo de Ingesta ETL de Kardex
+          Nómina de Estudiantes Habilitados
         </span>
-        <h1 className="etl-title">Gestor de Integración y Carga de Habilitados</h1>
+        <h1 className="etl-title">Carga de Nómina de Estudiantes desde Excel</h1>
         <p className="etl-subtitle">
-          Padrón Oficial de Estudiantes para Monitoreo y Acceso a la Encuesta · Sede La Paz
+          Padrón oficial de graduados autorizados para realizar la encuesta de titulación · Sede La Paz
         </p>
       </div>
 
@@ -276,7 +276,7 @@ export default function GestorIntegracion() {
         {/* Notificación de Error con detalle de fila */}
         {error && (
           <div className="alert-box alert-error">
-            <div className="alert-title">⚠️ Error en la validación del archivo:</div>
+            <div className="alert-title">Error en la validación del archivo:</div>
             <div>{error}</div>
           </div>
         )}
@@ -294,18 +294,19 @@ export default function GestorIntegracion() {
                 <th>Carrera</th>
                 <th>Modalidad</th>
                 <th>Gestión</th>
+                <th>Correo Institucional</th>
               </tr>
             </thead>
             <tbody>
               {cargandoLista ? (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center', padding: '2rem' }}>
+                  <td colSpan="6" style={{ textAlign: 'center', padding: '2rem' }}>
                     Cargando listado...
                   </td>
                 </tr>
               ) : estudiantes.length === 0 ? (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
+                  <td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
                     Aún no hay estudiantes habilitados registrados. Suba un archivo Excel para comenzar.
                   </td>
                 </tr>
@@ -321,6 +322,9 @@ export default function GestorIntegracion() {
                       </span>
                     </td>
                     <td>{est.gestion_semestre}</td>
+                    <td style={{ fontSize: '0.82rem', color: '#0369a1' }}>
+                      {est.correo_institucional || 'Sin correo registrado'}
+                    </td>
                   </tr>
                 ))
               )}

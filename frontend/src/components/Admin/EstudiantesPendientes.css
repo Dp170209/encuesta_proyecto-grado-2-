@@ -1,0 +1,282 @@
+/* =========================================================================
+   ESTILOS INSTITUCIONALES - ESTUDIANTES PENDIENTES (USEI UCB)
+   ========================================================================= */
+
+.pendientes-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  font-family: inherit;
+}
+
+.pendientes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.pendientes-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0e3d7a;
+  letter-spacing: -0.02em;
+}
+
+.pendientes-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+  color: #64748b;
+}
+
+.pendientes-badge-total {
+  background-color: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 0.55rem 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.badge-count {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #b45309;
+}
+
+.badge-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #92400e;
+}
+
+/* Toolbar */
+.pendientes-toolbar {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.toolbar-search-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.toolbar-search-input {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.toolbar-search-input:focus {
+  border-color: #0e3d7a;
+  box-shadow: 0 0 0 3px rgba(14, 61, 122, 0.1);
+}
+
+.toolbar-btn-search {
+  background-color: #1e293b;
+  color: #ffffff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toolbar-btn-search:hover {
+  background-color: #0f172a;
+}
+
+.toolbar-filters-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.toolbar-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.toolbar-select {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.toolbar-btn-clean {
+  background: none;
+  border: 1px dashed #94a3b8;
+  color: #64748b;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.toolbar-btn-clean:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+/* Error */
+.pendientes-error-banner {
+  background-color: #fef2f2;
+  border-left: 4px solid #ef4444;
+  color: #991b1b;
+  padding: 0.85rem 1.25rem;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+}
+
+/* Tabla */
+.pendientes-table-wrapper {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.pendientes-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.pendientes-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  padding: 0.85rem 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pendientes-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.pendientes-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.badge-semestre {
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.correo-inst-text {
+  font-size: 0.82rem;
+  color: #0369a1;
+  background-color: #f0f9ff;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid #e0f2fe;
+}
+
+/* Botón Campana de Recordatorio */
+.btn-campana-recordatorio {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1.5px solid #93c5fd;
+  padding: 0.45rem 0.95rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s;
+}
+
+.btn-campana-recordatorio:hover {
+  background-color: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.campana-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.badge-sending {
+  font-size: 0.8rem;
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.status-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #059669;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background-color: #ecfdf5;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #a7f3d0;
+}
+
+.status-error-hint {
+  font-size: 0.74rem;
+  color: #dc2626;
+  margin-top: 0.25rem;
+}
+
+.pendientes-footer-info {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  color: #64748b;
+  padding: 0 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .pendientes-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toolbar-filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .toolbar-btn-clean {
+    margin-left: 0;
+  }
+}

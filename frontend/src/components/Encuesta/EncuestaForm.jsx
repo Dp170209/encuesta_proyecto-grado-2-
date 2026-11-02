@@ -380,11 +380,10 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
             {/* Panel: Certificado Enviado */}
             <div className="success-panel-card panel-email">
               <div className="panel-header-title">
-                <span>✉️</span>
                 <span>Certificado Oficial Emitido y Enviado</span>
               </div>
               <p className="panel-text">
-                Hemos enviado tu Certificado Oficial (N° USEI-2026-{numCertFormateado}) a tu correo personal: <strong>{correoPrivadoDestino}</strong>. El documento cuenta con validez legal para la tramitación de tu titulación y firma de acta.
+                Hemos enviado su Certificado Oficial (N° USEI-2026-{numCertFormateado}) a su correo personal: <strong>{correoPrivadoDestino}</strong>. El documento cuenta con validez legal para la tramitación de su titulación y firma de acta.
               </p>
               <button
                 type="button"
@@ -392,27 +391,26 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
                 onClick={handleDescargarPdf}
                 disabled={descargandoPdf}
               >
-                {descargandoPdf ? 'Generando descarga...' : '📥 Descargar copia de Certificado Oficial (PDF)'}
+                {descargandoPdf ? 'Generando descarga...' : 'Descargar Copia de Certificado Oficial (PDF)'}
               </button>
             </div>
 
             {/* Panel: Beneficio Alumni */}
             <div className="success-panel-card panel-benefit">
               <div className="panel-header-title" style={{ color: '#92400e' }}>
-                <span>🎓</span>
                 <span>Beneficio Exclusivo Alumni UCB</span>
               </div>
               <p className="panel-text" style={{ color: '#78350f' }}>
-                Como graduado de la Universidad Católica Boliviana "San Pablo", cuentas con un <strong>10% de descuento automático</strong> en todos los programas de Postgrado, Maestrías y Diplomados de la universidad.
+                Como graduado de la Universidad Católica Boliviana "San Pablo", cuenta con un <strong>10% de descuento automático</strong> en todos los programas de Postgrado, Maestrías y Diplomados de la universidad.
               </p>
             </div>
           </div>
 
           {/* Sección de Vinculación a WhatsApp por Carrera */}
           <div className="whatsapp-community-section">
-            <h3 className="whatsapp-title">¡Únete a la Comunidad Alumni de tu Carrera!</h3>
+            <h3 className="whatsapp-title">Comunidad Alumni de su Carrera</h3>
             <p className="whatsapp-desc">
-              Accede a la red de contactos, bolsa de trabajo exclusiva y actividades para graduados de <strong>{carreraGraduado}</strong>.
+              Acceda a la red de contactos, bolsa de trabajo exclusiva y actividades institucionales para graduados de <strong>{carreraGraduado}</strong>.
             </p>
 
             <a
@@ -421,8 +419,7 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
               rel="noopener noreferrer"
               className="btn-whatsapp-join"
             >
-              <span className="btn-whatsapp-icon">💬</span>
-              <span>Unirme a la Comunidad de WhatsApp ({carreraGraduado})</span>
+              <span>Unirme al Grupo Oficial de WhatsApp ({carreraGraduado})</span>
             </a>
 
             <div style={{ marginTop: '1.25rem' }}>
@@ -431,7 +428,7 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
                 className="btn-finish-return"
                 onClick={onVolverAInicio}
               >
-                ← Salir y Finalizar Proceso
+                Salir y Finalizar Proceso
               </button>
             </div>
           </div>
@@ -462,16 +459,16 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
         {/* Pestañas de las 4 Secciones */}
         <div className="encuesta-steps-nav">
           <div className={`step-tab ${pasoActual === 1 ? 'active' : ''} ${pasoActual > 1 ? 'completed' : ''}`}>
-            {pasoActual > 1 ? '✓' : '1.'} 📋 Datos Generales
+            {pasoActual > 1 ? '✓ ' : '1. '}Datos Generales
           </div>
           <div className={`step-tab ${pasoActual === 2 ? 'active' : ''} ${pasoActual > 2 ? 'completed' : ''}`}>
-            {pasoActual > 2 ? '✓' : '2.'} 🏛️ Trayectoria
+            {pasoActual > 2 ? '✓ ' : '2. '}Trayectoria Académica
           </div>
           <div className={`step-tab ${pasoActual === 3 ? 'active' : ''} ${pasoActual > 3 ? 'completed' : ''}`}>
-            {pasoActual > 3 ? '✓' : '3.'} ⭐ Satisfacción
+            {pasoActual > 3 ? '✓ ' : '3. '}Satisfacción Institucional
           </div>
           <div className={`step-tab ${pasoActual === 4 ? 'active' : ''}`}>
-            4. 💼 Empleo & Postgrado
+            4. Situación Laboral y Postgrado
           </div>
         </div>
 
@@ -482,7 +479,6 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
         <div className="encuesta-body">
           {errorValidacion && (
             <div className="encuesta-alert-error">
-              <span>⚠️</span>
               <div>{errorValidacion}</div>
             </div>
           )}
@@ -525,7 +521,7 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
                       readOnly
                       title="Carrera asignada oficialmente por Kardex Académico"
                     />
-                    <span className="locked-field-badge">🔒 Verificado en Kardex</span>
+                    <span className="locked-field-badge">Registro Oficial Kardex</span>
                   </div>
                   <span className="verif-input-hint">
                     Dato inalterable del padrón de titulación para la emisión del certificado y grupo Alumni UCB.
@@ -1912,7 +1908,7 @@ export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) 
                 onClick={handleFinalizar}
                 disabled={loading}
               >
-                {loading ? 'Registrando respuestas...' : 'Finalizar Encuesta ✓'}
+                {loading ? 'Registrando respuestas...' : 'Finalizar y Emitir Certificado'}
               </button>
             )}
           </div>

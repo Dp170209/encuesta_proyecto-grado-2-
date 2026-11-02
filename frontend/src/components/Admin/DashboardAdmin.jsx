@@ -63,10 +63,9 @@ export default function DashboardAdmin() {
   if (cargando && !datos) {
     return (
       <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#0e3d7a' }}>
-        <div style={{ fontSize: '2.5rem', marginBottom: '1rem', animation: 'spin 1s infinite' }}>⚙️</div>
-        <h3 style={{ margin: 0, fontWeight: '700' }}>Cargando Indicadores de Inteligencia de Negocios...</h3>
+        <h3 style={{ margin: 0, fontWeight: '700' }}>Cargando Indicadores y Reportes de Titulación...</h3>
         <p style={{ color: '#64748b', fontSize: '0.9rem', marginTop: '0.5rem' }}>
-          Consultando registros consolidados de Kardex y USEI en PostgreSQL
+          Consultando registros consolidados del padrón oficial
         </p>
       </div>
     );
@@ -202,9 +201,8 @@ export default function DashboardAdmin() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '1.4rem' }}>📊</span>
               <h1 style={{ fontSize: '1.45rem', fontWeight: '800', color: '#0a2540', margin: 0, letterSpacing: '-0.3px' }}>
-                Tablero Analítico de Graduados · USEI
+                Tablero de Seguimiento a Graduados · USEI
               </h1>
               <span
                 style={{
@@ -217,11 +215,11 @@ export default function DashboardAdmin() {
                   textTransform: 'uppercase',
                 }}
               >
-                BI Real-Time
+                Tiempo Real
               </span>
             </div>
             <p style={{ margin: '0.2rem 0 0', color: '#64748b', fontSize: '0.82rem' }}>
-              Monitoreo y Cobertura Frente al Padrón Oficial de Titulación · Actualizado a las{' '}
+              Monitoreo y cobertura frente al padrón oficial de titulación · Actualizado a las{' '}
               {ultimaActualizacion.toLocaleTimeString('es-BO')}
             </p>
           </div>
@@ -246,7 +244,7 @@ export default function DashboardAdmin() {
               transition: 'all 0.2s',
             }}
           >
-            🔄 Actualizar
+            Actualizar Datos
           </button>
 
           <button

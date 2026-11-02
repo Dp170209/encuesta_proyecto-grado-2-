@@ -28,24 +28,40 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
     // Validación reactiva inmediata para el correo electrónico
     if (name === 'correo_privado') {
       const lower = value.toLowerCase().trim();
+      const partes = lower.split('@');
+      const dominio = partes.length === 2 ? partes[1] : '';
+
+      const TYPOS_GMAIL = new Set([
+        'gmai.com', 'gamil.com', 'gmial.com', 'gmaill.com', 'gmail.con',
+        'gmail.co', 'gemail.com', 'gmail.cpm', 'gmail.om', 'gmaik.com', 'gmail.comm'
+      ]);
+      const TYPOS_HOTMAIL = new Set([
+        'hotmial.com', 'hotmai.com', 'hotmail.con', 'hormail.com', 'hotmaill.com'
+      ]);
+      const TYPOS_OUTLOOK = new Set([
+        'outlok.com', 'outloo.com', 'outlook.con', 'outllok.com'
+      ]);
+      const TYPOS_YAHOO = new Set([
+        'yaho.com', 'yahoo.con', 'yaho.es', 'yahooo.com'
+      ]);
 
       if (lower.includes(',')) {
-        setAvisoCorreo("⚠️ Detectamos una coma ',' en lugar de un punto. Corríjalo (ej. @gmail.com).");
+        setAvisoCorreo("Detectamos una coma ',' en lugar de un punto. Corríjalo (ejemplo: usuario@gmail.com).");
         setCorreoInvalido(true);
-      } else if (lower.includes('@ucb.edu.bo')) {
-        setAvisoCorreo('⚠️ No se permiten correos académicos @ucb.edu.bo. Ingrese un correo personal.');
+      } else if (dominio === 'ucb.edu.bo' || lower.includes('@ucb.edu.bo')) {
+        setAvisoCorreo('No se permiten correos académicos @ucb.edu.bo. Ingrese un correo personal.');
         setCorreoInvalido(true);
-      } else if (/@(gmai\.com|gamil\.com|gmial\.com|gmaill\.com|gmail\.con|gmail\.co|gemail\.com)/.test(lower)) {
-        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @gmail.com?');
+      } else if (TYPOS_GMAIL.has(dominio)) {
+        setAvisoCorreo('Posible error tipográfico. ¿Quiso escribir @gmail.com?');
         setCorreoInvalido(true);
-      } else if (/@(hotmial\.com|hotmai\.com|hotmail\.con|hormail\.com)/.test(lower)) {
-        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @hotmail.com?');
+      } else if (TYPOS_HOTMAIL.has(dominio)) {
+        setAvisoCorreo('Posible error tipográfico. ¿Quiso escribir @hotmail.com?');
         setCorreoInvalido(true);
-      } else if (/@(outlok\.com|outloo\.com|outlook\.con)/.test(lower)) {
-        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @outlook.com?');
+      } else if (TYPOS_OUTLOOK.has(dominio)) {
+        setAvisoCorreo('Posible error tipográfico. ¿Quiso escribir @outlook.com?');
         setCorreoInvalido(true);
-      } else if (/@(yaho\.com|yahoo\.con)/.test(lower)) {
-        setAvisoCorreo('💡 Parece un error tipográfico. ¿Quiso escribir @yahoo.com?');
+      } else if (TYPOS_YAHOO.has(dominio)) {
+        setAvisoCorreo('Posible error tipográfico. ¿Quiso escribir @yahoo.com?');
         setCorreoInvalido(true);
       } else {
         setAvisoCorreo(null);
@@ -134,11 +150,10 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
           {/* Mensaje Informativo de Sesión Única */}
           <div className="verif-warning-box">
             <div className="verif-warning-title">
-              <span>⚠️</span>
               <span>Atención: Registro en Sesión Única</span>
             </div>
             <p className="verif-warning-text">
-              Por normativa de la USEI, debes completar y enviar la encuesta en este intento. Al finalizar, el sistema generará automáticamente tu <strong>Certificado Oficial en PDF</strong> para tu trámite de titulación.
+              Por normativa de la USEI, debe completar y enviar la encuesta en este intento. Al finalizar, el sistema generará automáticamente su <strong>Certificado Oficial en PDF</strong> para su trámite de titulación.
             </p>
           </div>
 
@@ -146,9 +161,9 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
           {estudianteVerificado ? (
             <div className="verif-success-card">
               <div className="verif-success-icon">✓</div>
-              <h3 className="verif-success-title">¡Identidad Verificada!</h3>
+              <h3 className="verif-success-title">Identidad Verificada</h3>
               <p style={{ fontSize: '0.9rem', color: '#475569' }}>
-                Bienvenido/a al proceso de graduación.
+                Bienvenido/a al proceso oficial de graduación.
               </p>
 
               <div className="verif-student-info">
@@ -163,7 +178,9 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
                 type="button"
                 className="verif-btn-start"
                 onClick={() => {
-                  alert('¡Acceso concedido! Redirigiendo a la Sección 1 del Formulario de Encuesta (Sprint 2)...');
+                  if (onAccesoConcedido) {
+                    onAccesoConcedido({ graduado: estudianteVerificado });
+                  }
                 }}
               >
                 Continuar a la Encuesta →
@@ -175,7 +192,6 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
               {/* Banner de Error */}
               {errorGeneral && (
                 <div className="verif-error-banner">
-                  <span>⛔</span>
                   <div>{errorGeneral}</div>
                 </div>
               )}
@@ -183,7 +199,7 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
               {/* Input: Carnet de Identidad */}
               <div className="verif-form-group">
                 <label className="verif-form-label" htmlFor="carnet_identidad">
-                  🪪 Carnet de Identidad (CI)
+                  Carnet de Identidad (CI)
                 </label>
                 <input
                   id="carnet_identidad"
@@ -201,7 +217,7 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
               {/* Input: Nombre Completo */}
               <div className="verif-form-group">
                 <label className="verif-form-label" htmlFor="nombre_completo">
-                  👤 Nombre Completo
+                  Nombres y Apellidos Completos
                 </label>
                 <input
                   id="nombre_completo"
@@ -222,7 +238,7 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
               {/* Input: Correo Electrónico Privado */}
               <div className="verif-form-group">
                 <label className="verif-form-label" htmlFor="correo_privado">
-                  ✉️ Correo Electrónico Personal
+                  Correo Electrónico Personal
                 </label>
                 <input
                   id="correo_privado"
@@ -254,9 +270,9 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
                 disabled={loading || correoInvalido}
               >
                 {loading ? (
-                  <>⏳ Validando con Padrón USEI...</>
+                  <>Validando con el Padrón Oficial...</>
                 ) : (
-                  <>🔒 Validar Identidad e Iniciar Encuesta →</>
+                  <>Validar Identidad e Iniciar Encuesta →</>
                 )}
               </button>
             </form>
@@ -265,7 +281,7 @@ export default function VerificacionAcceso({ onAccesoConcedido }) {
 
         {/* Pie de Tarjeta */}
         <div className="verif-card-footer">
-          🛡️ Acceso Seguro · Unidad de Servicios Estudiantiles Integrales (USEI) · U.C.B.
+          Acceso Oficial · Unidad de Servicios Estudiantiles Integrales (USEI) · U.C.B.
         </div>
       </div>
     </div>
