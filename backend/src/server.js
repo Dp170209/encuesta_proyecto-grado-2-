@@ -8,8 +8,10 @@ const encuestaRoutes = require('./routes/encuestaRoutes');
 const analiticaRoutes = require('./routes/analiticaRoutes');
 const { seedDefaultAdmin } = require('./db/seedAdmin');
 
-// Inicializar administrador por defecto si no existe
-seedDefaultAdmin();
+// Inicializar administrador por defecto si no existe (solo en ejecución normal)
+if (process.env.NODE_ENV !== 'test') {
+  seedDefaultAdmin();
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -65,11 +67,13 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.listen(PORT, () => {
-  console.log(`===============================================`);
-  console.log(` Servidor Backend USEI activo en puerto ${PORT}`);
-  console.log(` Endpoint ETL: http://localhost:${PORT}/api/etl/cargar-habilitados`);
-  console.log(`===============================================`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`===============================================`);
+    console.log(` Servidor Backend USEI activo en puerto ${PORT}`);
+    console.log(` Endpoint ETL: http://localhost:${PORT}/api/etl/cargar-habilitados`);
+    console.log(`===============================================`);
+  });
+}
 
 module.exports = app;

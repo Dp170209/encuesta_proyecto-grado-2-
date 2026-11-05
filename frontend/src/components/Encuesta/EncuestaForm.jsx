@@ -3,8 +3,8 @@ import './EncuestaForm.css';
 import { guardarEncuesta, descargarCertificadoPdf } from '../../services/encuestaApi';
 import { getGraduadoSesion } from '../../services/authApi';
 
-export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio }) {
-  const [pasoActual, setPasoActual] = useState(1);
+export default function EncuestaForm({ onEncuestaFinalizada, onVolverAInicio, pasoInicial = 1 }) {
+  const [pasoActual, setPasoActual] = useState(pasoInicial);
   const [loading, setLoading] = useState(false);
   const [errorValidacion, setErrorValidacion] = useState(null);
   const [finalizada, setFinalizada] = useState(false);

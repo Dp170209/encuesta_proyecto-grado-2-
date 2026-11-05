@@ -74,6 +74,10 @@ async function getDashboard(req, res) {
 
     return res.status(200).json({
       exito: true,
+      total_habilitados: Number(totales.total_habilitados),
+      encuestas_finalizadas: Number(totales.encuestas_finalizadas),
+      tasa_respuesta_pct: Number(totales.tasa_respuesta_pct),
+      totales,
       data: {
         totales,
         por_carrera: resCarreras.rows,

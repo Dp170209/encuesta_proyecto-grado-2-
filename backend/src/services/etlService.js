@@ -246,6 +246,11 @@ async function procesarArchivoHabilitados(fileBuffer, defaultGestion = '2026-1')
       total_procesados: rawRows.length,
       nuevos_insertados: insertados,
       omitidos_duplicados: duplicadosEnBD + duplicadosEnArchivo.length,
+      resumen: {
+        total_filas_procesadas: rawRows.length,
+        insertados,
+        duplicados_omitidos: duplicadosEnBD + duplicadosEnArchivo.length,
+      },
       detalle_duplicados: {
         en_archivo: duplicadosEnArchivo.length,
         ya_en_base_datos: duplicadosEnBD,

@@ -137,10 +137,12 @@ async function guardarRespuestas(req, res) {
         });
     });
 
-    // 9. Respuesta inmediata 201 Created al Frontend con los datos de emisión y WhatsApp
-    return res.status(201).json({
+    // 9. Respuesta inmediata 200 OK al Frontend con los datos de emisión y WhatsApp
+    return res.status(200).json({
       exito: true,
       mensaje: 'Encuesta registrada y certificado oficial emitido con éxito.',
+      nro_certificado: certEmitido.nro_certificado,
+      url_whatsapp: urlWhatsapp,
       data: {
         id_respuesta: nuevaRespuesta.id_respuesta,
         id_graduado: nuevaRespuesta.id_graduado,

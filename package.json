@@ -1,0 +1,10 @@
+{
+  "name": "encuesta_proyecto-grado-2",
+  "private": true,
+  "scripts": {
+    "test:backend": "npm --prefix backend test",
+    "test:frontend": "npm --prefix frontend test",
+    "test": "npm --prefix backend test && npm --prefix frontend test"
+  }
+}
+
