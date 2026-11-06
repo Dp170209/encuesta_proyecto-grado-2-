@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS estudiantes_habilitados (
     apellidos VARCHAR(100) NOT NULL,
     carrera VARCHAR(100) NOT NULL,
     modalidad_titulacion VARCHAR(50),
-    gestion_semestre VARCHAR(20) NOT NULL
+    gestion_semestre VARCHAR(20) NOT NULL,
+    correo_institucional VARCHAR(150)
 );
 
 -- Índice único opcional para acelerar búsquedas y garantizar unicidad por carnet

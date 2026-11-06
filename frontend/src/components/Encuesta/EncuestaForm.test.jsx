@@ -7,10 +7,10 @@ import EncuestaForm from './EncuestaForm';
 vi.mock('../../services/authApi', () => ({
   getGraduadoSesion: () => ({
     carnet_identidad: '8492041',
-    nombres: 'Juan',
-    apellidos: 'Perez',
+    nombres: 'Jared',
+    apellidos: 'Pimentel',
     carrera: 'Ingeniería de Sistemas',
-    correo_privado: 'juan.perez@gmail.com',
+    correo_privado: 'jaredpitiu1709@gmail.com',
   }),
 }));
 
@@ -20,7 +20,7 @@ vi.mock('../../services/encuestaApi', () => ({
 }));
 
 describe('Pruebas de Usabilidad e Interacción Frontend (HU-03)', () => {
-  it('Test 4 (CPS-03): Salto lógico condicional - Despliegue de motivo de cambio de carrera al seleccionar "Sí"', () => {
+  it('Test (CPS-03): Salto Lógico Condicional en Encuesta (HU-03) - Despliegue de preguntas variables según respuestas previas', () => {
     // Renderizamos directamente en la Sección 2 (Trayectoria Académica)
     const { container } = render(<EncuestaForm pasoInicial={2} />);
 

@@ -2,9 +2,12 @@
   "name": "encuesta_proyecto-grado-2",
   "private": true,
   "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
     "test:backend": "npm --prefix backend test",
     "test:frontend": "npm --prefix frontend test",
-    "test": "npm --prefix backend test && npm --prefix frontend test"
+    "test": "npm --prefix backend test && npm --prefix frontend test",
+    "test:email": "npm --prefix backend run test:email"
   }
 }
 

@@ -207,6 +207,27 @@ async function procesarArchivoHabilitados(fileBuffer, defaultGestion = '2026-1')
       return true;
     });
 
+    // Actualizar correo institucional y datos para registros ya existentes en la BD
+    for (const item of estudiantesValidados) {
+      if (carnetsExistentes.has(item.carnet_identidad) && item.correo_institucional) {
+        await client.query(
+          `UPDATE estudiantes_habilitados 
+           SET correo_institucional = $1,
+               carrera = COALESCE($2, carrera),
+               modalidad_titulacion = COALESCE($3, modalidad_titulacion),
+               gestion_semestre = COALESCE($4, gestion_semestre)
+           WHERE carnet_identidad = $5`,
+          [
+            item.correo_institucional,
+            item.carrera,
+            item.modalidad_titulacion,
+            item.gestion_semestre,
+            item.carnet_identidad,
+          ]
+        );
+      }
+    }
+
     if (paraInsertar.length > 0) {
       // Inserción por lotes con consulta parametrizada segura (OWASP Top 10 - Prevención SQLi)
       const values = [];
@@ -269,7 +290,7 @@ async function procesarArchivoHabilitados(fileBuffer, defaultGestion = '2026-1')
  */
 async function listarEstudiantesHabilitados(limite = 50) {
   const result = await db.query(
-    `SELECT id_habilitado, carnet_identidad, nombres, apellidos, carrera, modalidad_titulacion, gestion_semestre
+    `SELECT id_habilitado, carnet_identidad, nombres, apellidos, carrera, modalidad_titulacion, gestion_semestre, correo_institucional
      FROM estudiantes_habilitados
      ORDER BY id_habilitado DESC
      LIMIT $1`,
